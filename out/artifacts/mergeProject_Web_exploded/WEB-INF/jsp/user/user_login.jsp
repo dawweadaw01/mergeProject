@@ -1,0 +1,205 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: 20698
+  Date: 2022/12/12
+  Time: 17:57
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <base href="http://${header.host}${pageContext.request.contextPath}/"/>
+    <title>用户登录</title>
+    <link rel="stylesheet" href="static/css/user_login.css">
+    <link rel="stylesheet" href="static/verify-master/css/verify.css">
+    <link rel="stylesheet" href="static/bootstrap-3.4.1-dist/css/bootstrap.css">
+</head>
+<body>
+<!-- 最外层的大盒子 -->
+<div class="box">
+    <!-- 滑动盒子 -->
+    <div class="pre-box">
+        <h1>WELCOME</h1>
+        <p>JOIN US!</p>
+        <div class="img-box">
+            <img src="static/img/waoku.jpg" alt="">
+        </div>
+    </div>
+    <!-- 注册盒子 -->
+    <div class="register-form">
+        <!-- 标题盒子 -->
+        <div class="title-box">
+            <h1>注册</h1>
+        </div>
+        <!-- 输入框盒子 -->
+        <form id="registerForm" method="post" action="register" enctype="multipart/form-data" accept-charset="UTF-8">
+            <div class="input-box">
+                <input type="text" placeholder="用户名" name="username" id="username1">
+                <input type="email" placeholder="邮箱" name="email" id="email">
+                <input type="text" placeholder="手机号" name="phone" id="phone">
+                <input type="password" placeholder="密码" name="password" id="password1">
+                <input type="file" placeholder="头像" name="photo" id="photo">
+            </div>
+            <!-- 按钮盒子 -->
+            <div class="btn-box">
+                <button id="register" type="submit">注册</button>
+                <!-- 绑定点击事件 -->
+                <p onclick="mySwitch()">已有账号?去登录</p>
+            </div>
+        </form>
+
+    </div>
+    <!-- 登录盒子 -->
+    <div class="login-form">
+        <!-- 标题盒子 -->
+        <div class="title-box">
+            <h1>登录</h1>
+        </div>
+        <!-- 输入框盒子 -->
+        <form id="loginForm" method="post" action="login">
+            <div class="input-box">
+                <input type="text" placeholder="用户名" name="username" id="username">
+                <input type="password" placeholder="密码" name="password" id="password">
+            </div>
+            <!-- 按钮盒子 -->
+            <div class="btn-box">
+                <button type="submit" id="login">登录</button>
+                <!-- 绑定点击事件 -->
+                <p onclick="mySwitch()">没有账号?去注册</p>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 滑块验证码 -->
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">验证码</h4>
+            </div>
+            <div class="modal-body">
+                <div id="mpanel4" style="margin-top:50px;">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                <button id="btnSave" type="button" class="btn btn-primary">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 添加滑动验证码的模块 -->
+<script src="static/jquery-3.5.1/jquery-3.5.1.js"></script>
+<script src="static/bootstrap-3.4.1-dist/js/bootstrap.js"></script>
+<script src="static/verify-master/js/verify.js"></script>
+<script>
+
+    // 书写函数封装
+    $(function () {
+        // 点击登录出现验证码框
+        // btnSlide();
+        //滑块验证码的函数
+        slideFunc();
+        // 登录函数
+        // loginFunc();
+    });
+
+    // 点击登录出现验证码框
+    // function btnSlide() {
+    //     $("#login").click(function () {
+    //         $('#myModal').modal('show');
+    //     });
+    // }
+
+    // 滑块验证码的函数
+    function slideFunc() {
+        $('#mpanel4').slideVerify({
+            type: 2,		//类型
+            vOffset: 5,	//误差量，根据需求自行调整
+            vSpace: 5,	//间隔
+            imgUrl: "static/img/",
+            imgName: ['slide1.webp', 'slide2.webp',],
+            imgSize: {
+                width: '568px',
+                height: '305px',
+            },
+            blockSize: {
+                width: '50px',
+                height: '50px',
+            },
+            barSize: {
+                width: '568px',
+                height: '40px',
+            },
+            ready: function () {
+            },
+            success: function () {
+                alert('验证成功，添加你自己的代码！');
+                //......后续操作
+            },
+            error: function () {
+                alert('验证失败！');
+            }
+
+        });
+    }
+
+    //登录函数
+    // function loginFunc() {
+    //     $("#btnSave").click(function () {
+    //         let username = $("#loginForm #username").val();
+    //         let password = $("#loginForm #password").val();
+    //         // console.log(username + " " + password);
+    //         $.ajax({
+    //             url: "login",
+    //             type: "post",
+    //             dataType: 'jsonp',  // 请求方式为jsonp
+    //             crossDomain: true,
+    //             //接收的数据
+    //             data: JSON.stringify({
+    //                 username: username,
+    //                 password: password,
+    //             }),
+    //             // 定义发送请求的数据格式为JSON字符串
+    //             contentType: "application/json;charset=UTF-8",
+    //             //定义回调响应的数据格式为JSON字符串,该属性可以省略
+    //             // dataType: "json",
+    //             success: function (data) {
+    //                 if (data != null) {
+    //                     console.log(data);
+    //                 }
+    //             }
+    //         });
+    //     });
+    //
+    // }
+</script>
+
+<!-- 下面是页面的JS代码 -->
+<script>
+    // 滑动的状态
+    let flag = true;
+    const mySwitch = () => {
+        if (flag) {
+            // 获取到滑动盒子的dom元素并修改它移动的位置
+            $(".pre-box").css("transform", "translateX(100%)");
+            // 获取到滑动盒子的dom元素并修改它的背景颜色
+            $(".pre-box").css("background-color", "#c9e0ed");
+            //修改图片的路径
+            $("img").attr("src", "static/img/wuwu.jpeg");
+
+        } else {
+            $(".pre-box").css("transform", "translateX(0%)");
+            $(".pre-box").css("background-color", "#edd4dc");
+            $("img").attr("src", "static/img/waoku.jpg");
+        }
+        flag = !flag;
+    };
+</script>
+</body>
+</html>

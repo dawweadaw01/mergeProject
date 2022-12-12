@@ -1,0 +1,229 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.all-wrapper{
+    width: 100%;
+    height: 100%;
+
+    background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+}
+
+/* 设置所有a */
+a,
+a:hover,
+a:active,
+a:visited{
+    text-decoration: none;
+    color: #eeddff;
+}
+
+/* 设置外层容器 */
+.out-wrapper{
+    width: 1200px;
+    height: 60px;
+    margin: 0 auto; 
+}
+
+/* 设置导航栏容器 */
+.out-wrapper .header-wrapper{
+    height: 60px;
+    width: 100%;
+    background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+/* 设置logo */
+.logo{
+    width: 200px;
+    height: 60px;
+    text-align: center;
+}
+/* .logo img{
+    height: 100%;
+} */
+.logo a{
+    line-height: 60px;
+    font-size: 25px;
+}
+.logo a i{
+    color: #ff9a9e;
+    font-size: 50px !important;
+}
+
+/* 设置导航栏 */
+.nav-bar{
+    width: 900px;
+    height: 60px;
+    background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+}
+.nav-bar .navBar{
+    height: 60px;
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+.navBar li{
+    line-height: 60px;
+    cursor: pointer;
+    flex-grow: 1;
+}
+.navBar li:hover{
+    background-image: linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%);
+}
+
+/* 设置右侧工具栏 */
+.tool-bar{
+    display: flex;
+    width: 100px;
+    height: 60px;
+}
+.tool-bar .feed{
+    width: 50px;
+    line-height: 60px;
+}
+.tool-bar .feed a i{
+    color: #ff9a9e;
+    font-size: 30px !important;
+}
+.tool-bar .admin{
+    width: 50px;
+    line-height: 60px;
+    color: #ff9a9e;
+    font-size: 30px !important;
+}
+.tool-bar .admin a i{
+    color: #ff9a9e;
+    font-size: 30px !important;
+}
+
+/* 设置搜索框 */
+.out-wrapper .search-wrapper{
+    width: 1200px;
+    height: 50px;
+    background-image: linear-gradient(to bottom, #fbc2eb 0%, #a6c1ee 100%);
+}
+
+.search-wrapper .search-in{
+    width: 300px;
+    height: 50px;
+}
+.search-in i{ 
+    width: 50px;
+    height: 50px;
+    color: #ff9a9e;
+    font-size: 30px !important;
+    cursor: pointer;
+}
+.search-in input{
+    width: 250px;
+    height: 50px;
+    border: 0;
+    background-image: linear-gradient(to bottom, #fbc2eb 0%, #a6c1ee 100%);
+    outline: none; 
+}
+
+/* 设置轮播图容器 */
+.swiper{
+    width: 1200px;
+    height: 400px;
+    background-color: #a6c1ee;
+}
+.swiper-slide{
+    position: absolute;
+}
+.swiper-slide img{
+    width: 100%;
+    height: 300px;
+    position: relative;
+}
+/* 设置轮播图下方的文字信息 */
+.swiper-slide .remark{
+    position: relative;
+    left: 100px;
+    top: -20px;
+    color: aliceblue;
+    font-size: 14px;
+}
+.swiper-slide .comicName{
+    height: 30px;
+    width: 200px;
+    position: relative;
+    top: 10px;
+    color: #FFFFF2;
+    font-size: 20px;
+}
+.swiper-slide .description{
+    height: 30px;
+    width: 200px;
+    position: relative;
+    top: 20px;
+    color: #928E90;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+/* 设置主容器 */
+.main-wrapper{
+    width: 1200px;
+    height: 100%;
+    margin-top: 20px;
+}
+/* 最近更新 */
+.main-wrapper .latest{
+    width: 1200px;
+    height: 400px;
+}
+/* 最新更新-标题 */
+.latest .title{
+    width: 1200px;
+    height: 50px;
+}
+/* 最新更新-图片列表 */
+.latest .list{
+    list-style: none;
+    width: 1200px;
+    height: 350px;
+    display: flex;
+    justify-content: space-around;
+}
+/* 设置图片容器 */
+.latest .list li .imgList{
+    width: 200px;
+    height: 300px;
+    padding: 0 10px;
+}
+/* 设置图片下方内容 */
+.latest .imgList img{
+    width: 180px;
+    height: 300px;
+}
+/* .latest .list li{
+    position: absolute;
+} */
+.list li .remark{
+    position: relative;
+    left: 100px;
+    top: -18px;
+    color: aliceblue;
+    font-size: 14px;
+}
+.list li .comicName{
+    position: relative;
+    left: 10px;
+    color: #a6c1ee;
+    font-size: 20px;
+}
+.list li .description{
+    width: 220px;
+    height: 14px;
+    position: relative;
+    left: 10px;
+    color: #928E90;
+    font-size: 14px;
+    overflow: hidden;
+}
