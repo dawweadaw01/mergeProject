@@ -22,15 +22,20 @@ public interface UserDao {
 
     Admin loginAdmin(String adminName,String password);
 
-    List<User> selectAll(int pageNum, int pageSize);
-
-    int count();
-
     int delete(int id);
 
     int update(User user);
 
     //根据用户名模糊查询
     List<User> selectByName(String adminName);
+
+    // 下面两个是分页渲染数据
+    int countUser();
+
+    List<User> selectAllUser(int pageNum, int pageSize);
+
+    int countAdmin();
+
+    List<Admin> selectAllAdmin(int pageNum, int pageSize);
 
 }

@@ -15,14 +15,18 @@ public interface UserService {
 
     User selectByUserId(int id);
 
-    List<User> selectAll(int pageNum, int pageSize);
-
-    int count();
-
     int delete(int id);
 
     int update(User user);
 
     List<User> selectByName(String adminName);
+
+    int countUser();
+
+    List<User> selectAllUser(int pageNum, int pageSize);
+
+    int countAdmin();
+
+    List<Admin> selectAllAdmin(int pageNum, int pageSize);
 
 }

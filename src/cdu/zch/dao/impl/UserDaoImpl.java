@@ -19,11 +19,11 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     @Override
     public int insert(User user) {
         int rows = 0;
-        String sql = "INSERT INTO user_table(userNae,password,avatar,email,phone,createTime) VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO user_table(userName,password,avatar,email,phone,createTime) VALUES(?,?,?,?,?,?)";
         System.out.println("DAO 插入用户: " + user);
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, user.getUserNae());
+            pstmt.setString(1, user.getUserName());
             pstmt.setString(2, user.getPassword());
             pstmt.setString(3, user.getAvatar());
             pstmt.setString(4, user.getEmail());
@@ -40,7 +40,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     @Override
     public User login(String name, String password) {
         User user = null;
-        String sql = "SELECT * FROM user_table WHERE userNae=? AND password=?";
+        String sql = "SELECT * FROM user_table WHERE userName=? AND password=?";
 
         try {
             pstmt = conn.prepareStatement(sql);
@@ -50,7 +50,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             while (rs.next()) {
                 user = new User();
                 user.setId(rs.getInt("id"));
-                user.setUserNae(rs.getString("userNae"));
+                user.setUserName(rs.getString("userName"));
                 user.setPassword(rs.getString("password"));
                 user.setAvatar(rs.getString("avatar"));
                 user.setEmail(rs.getString("email"));
@@ -117,7 +117,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             while (rs.next()) {
                 user = new User();
                 user.setId(rs.getInt("id"));
-                user.setUserNae(rs.getString("userNae"));
+                user.setUserName(rs.getString("userName"));
                 user.setPassword(rs.getString("password"));
                 user.setAvatar(rs.getString("avatar"));
                 user.setEmail(rs.getString("email"));
@@ -196,62 +196,6 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     }
 
     @Override
-    public List<User> selectAll(int pageNum, int pageSize) {
-        List<User> users = new ArrayList<>();
-        String sql = "SELECT * FROM user_table LIMIT ?,?";
-        try {
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, (pageNum - 1) * pageSize);
-            pstmt.setInt(2, pageSize);
-            rs = pstmt.executeQuery();
-            while (rs.next()) {
-                User user = new User();
-                user.setId(rs.getInt("id"));
-                user.setUserNae(rs.getString("userNae"));
-                user.setPassword(rs.getString("password"));
-                user.setAvatar(rs.getString("avatar"));
-                user.setEmail(rs.getString("email"));
-                user.setPhone(rs.getString("phone"));
-                user.setCreateTime(rs.getLong("createTime"));
-                String collection = rs.getString("collection");
-                if (collection != null) {
-                    String[] collections = collection.split("_");
-                    user.setCollection(collections);
-                } else {
-                    user.setCollection(new String[0]);
-                }
-                String historys = rs.getString("history");
-                if (historys != null) {
-                    String[] history = historys.split("_");
-                    user.setHistory(history);
-                } else {
-                    user.setHistory(new String[0]);
-                }
-                users.add(user);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return users;
-    }
-
-    @Override
-    public int count() {
-        int count = 0;
-        String sql = "SELECT COUNT(*) FROM user_table";
-        try {
-            pstmt = conn.prepareStatement(sql);
-            rs = pstmt.executeQuery();
-            while (rs.next()) {
-                count = rs.getInt(1);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return count;
-    }
-
-    @Override
     public int delete(int id) {
         int rows = 0;
         String sql = "DELETE FROM user_table WHERE id=?";
@@ -268,10 +212,10 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     @Override
     public int update(User user) {
         int rows = 0;
-        String sql = "UPDATE user_table SET userNae=?,password=?,avatar=?,email=?,phone=?,createTime=?,collection=?,history=? WHERE id=?";
+        String sql = "UPDATE user_table SET userName=?,password=?,avatar=?,email=?,phone=?,createTime=?,collection=?,history=? WHERE id=?";
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, user.getUserNae());
+            pstmt.setString(1, user.getUserName());
             pstmt.setString(2, user.getPassword());
             pstmt.setString(3, user.getAvatar());
             pstmt.setString(4, user.getEmail());
@@ -300,7 +244,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     @Override
     public List<User> selectByName(String adminName) {
         List<User> users = new ArrayList<>();
-        String sql = "SELECT * FROM user_table WHERE userNae LIKE ?";
+        String sql = "SELECT * FROM user_table WHERE userName LIKE ?";
         try {
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, "%" + adminName + "%");
@@ -308,7 +252,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             while (rs.next()) {
                 User user = new User();
                 user.setId(rs.getInt("id"));
-                user.setUserNae(rs.getString("userNae"));
+                user.setUserName(rs.getString("userNae"));
                 user.setPassword(rs.getString("password"));
                 user.setAvatar(rs.getString("avatar"));
                 user.setEmail(rs.getString("email"));
@@ -334,5 +278,100 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             e.printStackTrace();
         }
         return users;
+    }
+
+    @Override
+    public int countUser() {
+        int count = 0;
+        String sql = "SELECT COUNT(*) FROM user_table";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    @Override
+    public List<User> selectAllUser(int pageNum, int pageSize) {
+        List<User> users = new ArrayList<>();
+        String sql = "SELECT * FROM user_table LIMIT ?,?";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, (pageNum - 1) * pageSize);
+            pstmt.setInt(2, pageSize);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                User user = new User();
+                user.setId(rs.getInt("id"));
+                user.setUserName(rs.getString("userName"));
+                user.setPassword(rs.getString("password"));
+                user.setAvatar(rs.getString("avatar"));
+                user.setEmail(rs.getString("email"));
+                user.setPhone(rs.getString("phone"));
+                user.setCreateTime(rs.getLong("createTime"));
+                String collection = rs.getString("collection");
+                if (collection != null) {
+                    String[] collections = collection.split("_");
+                    user.setCollection(collections);
+                } else {
+                    user.setCollection(new String[0]);
+                }
+                String historys = rs.getString("history");
+                if (historys != null) {
+                    String[] history = historys.split("_");
+                    user.setHistory(history);
+                } else {
+                    user.setHistory(new String[0]);
+                }
+                users.add(user);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    @Override
+    public int countAdmin() {
+        int count = 0;
+        String sql = "SELECT COUNT(*) FROM user_table";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    @Override
+    public List<Admin> selectAllAdmin(int pageNum, int pageSize) {
+        List<Admin> admins = new ArrayList<>();
+        String sql = "SELECT * FROM admin_table LIMIT ?,?";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, (pageNum - 1) * pageSize);
+            pstmt.setInt(2, pageSize);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Admin admin = new Admin();
+                admin.setId(rs.getInt("id"));
+                admin.setAdminName(rs.getString("adminName"));
+                admin.setPassword(rs.getString("password"));
+                admin.setDefault_avatar(rs.getString("default_avatar"));
+                admins.add(admin);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return admins;
     }
 }

@@ -53,7 +53,7 @@ public class RegisterServlet extends HttpServlet {
                 //判断表单域，还是上传的文件
                 if (item.isFormField()) {
                     if (item.getFieldName().equals("username")) {
-                        user.setUserNae(new String(item.getString().getBytes("iso-8859-1"), "utf-8"));
+                        user.setUserName(new String(item.getString().getBytes("iso-8859-1"), "utf-8"));
                     }
                     if(item.getFieldName().equals("password")){
                         user.setPassword(new String(item.getString().getBytes("iso-8859-1"), "utf-8"));

@@ -49,16 +49,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> selectAll(int pageNum, int pageSize) {
-        return userDao.selectAll(pageNum,pageSize);
-    }
-
-    @Override
-    public int count() {
-        return userDao.count();
-    }
-
-    @Override
     public int delete(int id) {
         return userDao.delete(id);
     }
@@ -71,6 +61,27 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> selectByName(String adminName) {
         return userDao.selectByName(adminName);
+    }
+
+
+    @Override
+    public int countUser() {
+        return userDao.countUser();
+    }
+
+    @Override
+    public List<User> selectAllUser(int pageNum, int pageSize) {
+        return userDao.selectAllUser(pageNum,pageSize);
+    }
+
+    @Override
+    public int countAdmin() {
+        return userDao.countAdmin();
+    }
+
+    @Override
+    public List<Admin> selectAllAdmin(int pageNum, int pageSize) {
+        return userDao.selectAllAdmin(pageNum, pageSize);
     }
 }
 

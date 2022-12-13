@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
+<%--
+  Created by IntelliJ IDEA.
+  User: 20698
+  Date: 2022/12/13
+  Time: 14:08
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <meta charset="UTF-8">
+    <base href="http://${header.host}${pageContext.request.contextPath}/"/>
+    <meta charset="utf-8"/>
     <title>首页</title>
+    <!-- 引入CSS样式 -->
+    <link rel="stylesheet" href="static/css/reset.css">
     <link rel="stylesheet" href="static/css/index.css">
-    <link rel="stylesheet" href="static/reset/reset.css">
     <!-- 引入图标iconfont -->
     <link rel="stylesheet" href="static/font/iconfont.css">
     <!-- 引入swiper插件 -->
@@ -41,7 +50,7 @@
                         <a href="javascript:;">动漫电影</a>
                     </li>
                     <li>
-                        <a href="javascript:;">动漫资讯</a>
+                        <a href="./comic_info.html">动漫资讯</a>
                     </li>
                     <li>
                         <a href="javascript:;">欧美动漫</a>
@@ -59,7 +68,7 @@
                     </a>
                 </div>
                 <div class="admin">
-                    <a href="WEB-INF/jsp/login_choice.jsp">
+                    <a href="login_choice.do">
                         <i class="iconfont icon-my-admin"></i>
                     </a>
                 </div>
@@ -392,7 +401,7 @@
 </div>
 
 <!-- 以下是写swiper轮播图 -->
-<script src="static/swiper/swiper-bundle.min.js"></script>
+<script src="./static/swiper/swiper-bundle.min.js"></script>
 <script>
     var mySwiper = new Swiper('.swiper', {
         loop: true, // 循环模式选项

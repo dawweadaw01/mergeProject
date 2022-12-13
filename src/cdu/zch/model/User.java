@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class User {
     private int id;
-    private String userNae;
+    private String userName;
     private String password;
     private String avatar;
     private String email;
@@ -17,7 +17,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", userNae='" + userNae + '\'' +
+                ", userNae='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", avatar='" + avatar + '\'' +
                 ", email='" + email + '\'' +
@@ -28,9 +28,9 @@ public class User {
                 '}';
     }
 
-    public User(int id, String userNae, String password, String avatar, String email, String phone, long createTime, String[] collection, String[] history) {
+    public User(int id, String userName, String password, String avatar, String email, String phone, long createTime, String[] collection, String[] history) {
         this.id = id;
-        this.userNae = userNae;
+        this.userName = userName;
         this.password = password;
         this.avatar = avatar;
         this.email = email;
@@ -80,12 +80,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUserNae() {
-        return userNae;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserNae(String userNae) {
-        this.userNae = userNae;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
