@@ -26,7 +26,7 @@
             <div class="arm arm-r"></div>
         </div>
     </div>
-    <form id="form" method="post" action="AdminLogin">
+    <form id="form" method="post" action="AdminLogin"> <!--   method="post" action="AdminLogin"  -->
         <div class="input-box">
             <input type="text" placeholder="账号" id="adminName" name="adminName">
             <input type="password" placeholder="密码" id="password" name="password">
@@ -47,53 +47,51 @@
             // 密码框失去焦点，移除样式.password
             $('#owl').removeClass('password');
         })
+        // login();
+        updateImg();
     })
 
-    // $(function () {
-    //     updateImg();
-    //     // login();
-    // })
-
     // 写获取验证码的函数
-    // function getCode() {
-    //     $("#validImg").attr("src", "");
-    //     $.ajax({
-    //         url: "validCode",
-    //         type: "post",
-    //         success: function (data) {
-    //             $("#validImg").attr("src", data + "?datetime=" + new Date().getTime() + Math.round(Math.random() * 100));
-    //         }
-    //     });
-    // }
+    function getCode() {
+        $("#validImg").attr("src", "");
+        $.ajax({
+            url: "validCode",
+            type: "get",
+            contentType: "charset=UTF-8",
+            success: function (data) {
+                $("#validImg").attr("src", this.url + "?datetime=" + new Date().getTime() + Math.round(Math.random() * 100));
+            }
+        });
+    }
 
     // 更新验证码
-    // function updateImg() {
-    //     $("#validImg").click(function () {
-    //         getCode();
-    //     })
-    // }
+    function updateImg() {
+        $("#validImg").click(function () {
+            getCode();
+        })
+    }
 
     // 写登录函数
     // function login() {
     //     $('#login').click(function () {
     //         let adminName = $("#form #adminName").val();
     //         let password = $("#form #password").val();
-    //         console.log(adminName + " " + password);
+    //         let validCode = $('#form #validCode').val();
     //         $.ajax({
-    //             url: "/AdminLogin",
+    //             url: "AdminLogin",
     //             type: "post",
-    //             data: JSON.stringify({
-    //                 adminName: adminName,
-    //                 password: password,
-    //             }),
-    //             // 定义发送请求的数据格式为JSON字符串
-    //             contentType: "application/json;charset=UTF-8",
-    //             //定义回调响应的数据格式为JSON字符串,该属性可以省略
-    //             dataType: "json",
+    //             data: {
+    //                 'adminName': adminName,
+    //                 'password': password,
+    //                 'validCode': validCode
+    //             },
+    //             dataType: "text",
     //             success: function (data) {
-    //                 if (data != null) {
-    //                     console.log(data);
-    //                     location.href = "test3.jsp";
+    //                 console.log(data);
+    //                 if (data !== false) {
+    //                     window.location.href = "manage/manage.do";
+    //                 }else{
+    //                     alert("用户名或者密码错误");
     //                 }
     //             }
     //         });

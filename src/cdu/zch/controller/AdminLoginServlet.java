@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * 管理员登录类，用于登录，并将得到的user存入到session中
@@ -23,7 +24,7 @@ public class AdminLoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");
-        String userNae = req.getParameter("adminName");
+        String adminName = req.getParameter("adminName");
         String password = req.getParameter("password");
         String validCode = req.getParameter("validCode");
         HttpSession session = req.getSession();
@@ -35,11 +36,14 @@ public class AdminLoginServlet extends HttpServlet {
             return;
         }
         session.removeAttribute("validCode");
-        Admin admin = userService.loginAdmin(userNae, password);
+        Admin admin = userService.loginAdmin(adminName, password);
+//        PrintWriter out = resp.getWriter();
         if (admin != null) {
             session.setAttribute("admin", admin);
-            resp.sendRedirect("admin/test3.do");
+//            out.print(true);
+            req.getRequestDispatcher("manage/manage.do").forward(req, resp);
         }else {
+//            out.print(false);
             resp.sendRedirect("admin/admin_login.do");
         }
     }

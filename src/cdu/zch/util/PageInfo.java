@@ -9,7 +9,7 @@ public class PageInfo<T> {
     private int count; // 数据总数 数据库中查出
     private int pageSize; // 每页最大数据条数 由用户指定
 
-    private List<T> list; // 已经分好页的结果集
+    private List<T> list; // 相当于是存放页码的数组
     public PageInfo() {
     }
 

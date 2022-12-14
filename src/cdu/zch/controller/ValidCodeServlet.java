@@ -47,6 +47,8 @@ public class ValidCodeServlet extends HttpServlet {
         response.setHeader("Pragma", "No-cache");
         response.setHeader("Cache-Control", "no-cache");
         response.setDateHeader("Expires", 0);
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html");
         //向客户端返回图像
         ImageIO.write(image, "png", response.getOutputStream());
 

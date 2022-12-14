@@ -169,36 +169,28 @@
     </div>
 </div>
 
-<!-- 分页 -->
+<!--分页-->
 <nav aria-label="Page navigation" style="text-align: center">
-    <ul class="pagination justify-content-center">
-        <li>
-            <c:if test="${requestScope.pageInfo.currentPage > 1}">
-                <a href="manage/user?currentPage=${requestScope.pageInfos.currentPage - 1}" aria-label="Previous">
+    <ul class="pagination pagination-lg">
+        <li><a href="manage/user?currentPage=1">首页</a></li>
+        <c:if test="${requestScope.pageInfo.currentPage > 1}">
+            <li>
+                <a href="manage/user?currentPage=${requestScope.pageInfo.currentPage - 1}" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
-            </c:if>
-        </li>
-        <c:if test="${requestScope.pageInfo.pageNum <= 1}">
-            <li><a href="manage/user?currentPage=${requestScope.pageInfo.currentPage}">1</a></li>
+            </li>
         </c:if>
-        <c:if test="${requestScope.pageInfo.pageNum > 1}">
-            <c:forEach items="${requestScope.pageInfo}" var="page">
-                <li><a href="manage/user?currentPage=${page.currentPage}">${page.pageNum}</a></li>
-            </c:forEach>
-        </c:if>
-<%--        <li><a href="#">1</a></li>--%>
-<%--        <li><a href="#">2</a></li>--%>
-<%--        <li><a href="#">3</a></li>--%>
-<%--        <li><a href="#">4</a></li>--%>
-<%--        <li><a href="#">5</a></li>--%>
-        <li>
-            <c:if test="${requestScope.pageInfo.currentPage > requestScope.pageInfos.pageNum}">
-                <a href="list?currentPage=${requestScope.pageInfos.currentPage - 1}" aria-label="Next">
-                    <span aria-hidden="true">&laquo;</span>
+        <c:forEach items="${requestScope.arr}" var="num">
+            <li><a href="manage/user?currentPage=${num}">${num}</a></li>
+        </c:forEach>
+        <c:if test="${requestScope.pageInfo.currentPage < requestScope.pageInfo.pageNum}">
+            <li>
+                <a href="manage/user?currentPage=${requestScope.pageInfo.currentPage + 1}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
                 </a>
-            </c:if>
-        </li>
+            </li>
+        </c:if>
+        <li><a href="manage/user?currentPage=${requestScope.pageInfo.pageNum}">末页</a></li>
     </ul>
 </nav>
 

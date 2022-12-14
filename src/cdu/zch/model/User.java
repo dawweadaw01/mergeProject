@@ -1,8 +1,9 @@
 package cdu.zch.model;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class User {
+public class User implements Serializable {
     private int id;
     private String userName;
     private String password;

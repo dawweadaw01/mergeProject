@@ -11,7 +11,7 @@
 <head>
     <base href="http://${header.host}${pageContext.request.contextPath}/"/>
     <meta charset="utf-8"/>
-    <title>管理员管理页面</title>
+    <title>动漫管理页面</title>
     <link rel="stylesheet" href="static/bootstrap-3.4.1-dist/css/bootstrap.css">
     <!-- 引入图标字体 -->
     <link rel="stylesheet" href="static/font/iconfont.css">
@@ -73,75 +73,48 @@
             <thead>
             <tr>
                 <th>编号</th>
-                <th>用户名</th>
-                <th>密码</th>
-                <th>头像</th>
-                <th>邮箱</th>
-                <th>手机号</th>
-                <th>创建时间</th>
-                <th>历史观看</th>
-                <th>收藏动漫</th>
+                <th>动漫名字</th>
+                <th>别名</th>
+                <th>封面</th>
+                <th>地区</th>
+                <th>标签</th>
+                <th>描述</th>
+                <th>备注</th>
+                <th>年份</th>
+                <th>更新时间</th>
+                <th>集数</th>
+                <th>人气</th>
+                <th>外部链接</th>
                 <th>操作</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>
-                    <button id="btnEdit" class="btn btn-warning"><span
-                            class="iconfont icon-xiugai"></span>修改
-                    </button>
-                    <button id="btnDelete" class="btn btn-danger"><span
-                            class="iconfont icon-shanchu"></span>删除
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>
-                    <button id="btnEdit" class="btn btn-warning"><span
-                            class="iconfont icon-xiugai"></span>修改
-                    </button>
-                    <button id="btnDelete" class="btn btn-danger"><span
-                            class="iconfont icon-shanchu"></span>删除
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-                <td>@twitter</td>
-                <td>@twitter</td>
-                <td>@twitter</td>
-                <td>@twitter</td>
-                <td>@twitter</td>
-                <td>
-                    <button id="btnEdit" class="btn btn-warning"><span
-                            class="iconfont icon-xiugai"></span>修改
-                    </button>
-                    <button id="btnDelete" class="btn btn-danger"><span
-                            class="iconfont icon-shanchu"></span>删除
-                    </button>
-                </td>
-            </tr>
+            <c:forEach items="${requestScope.comicList}" var="comic">
+                <tr>
+                    <th scope="row">${comic.id}</th>
+                    <td>${comic.comicName}</td>
+                    <td>${comic.nickname}</td>
+                    <td>${comic.cover}</td>
+                    <td>${comic.region}</td>
+                    <td>${comic.label}</td>
+                    <td>${comic.description}</td>
+                    <td>${comic.remark}</td>
+                    <td>${comic.year}</td>
+                    <td>${comic.updateTime}</td>
+                    <td>${comic.number}</td>
+                    <td>${comic.popularity}</td>
+                    <td>${comic.url}</td>
+                    <td>
+                        <button class="btn btn-warning btnEdit"><span
+                                class="iconfont icon-xiugai"></span>修改
+                        </button>
+                        <button class="btn btn-danger btnDelete"><span
+                                class="iconfont icon-shanchu"></span>删除
+                        </button>
+                    </td>
+                </tr>
+            </c:forEach>
+
             </tbody>
         </table>
     </div>
@@ -159,26 +132,56 @@
             </div>
             <div class="modal-body">
                 <div class="panel-body">
-                    <div class="form-group">
-                        <label for="username">用户名</label>
-                        <input type="text" class="form-control" id="username" placeholder="请输入用户名">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">密码</label>
-                        <input type="password" class="form-control" id="password" placeholder="请输入密码">
-                    </div>
-                    <div class="form-group">
-                        <label for="avatar">头像</label>
-                        <input type="file" id="avatar">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">邮箱</label>
-                        <input type="email" class="form-control" id="email" placeholder="请输入邮箱">
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">手机号</label>
-                        <input type="text" class="form-control" id="phone" placeholder="请输入邮箱">
-                    </div>
+<%--                    <c:forEach items="${requestScope.comicList}" var="comic">--%>
+                        <div class="form-group">
+                            <label for="comicName">动漫名字</label>
+                            <input type="text" class="form-control" id="comicName" placeholder="" name="comicName">
+                        </div>
+                        <div class="form-group">
+                            <label for="nickname">别名</label>
+                            <input type="text" class="form-control" id="nickname" placeholder="" name="nickname">
+                        </div>
+                        <div class="form-group">
+                            <label for="cover">封面</label>
+                            <input type="file" id="cover" name="cover">
+                        </div>
+                        <div class="form-group">
+                            <label for="region">地区</label>
+                            <input type="text" class="form-control" id="region" placeholder="" name="region">
+                        </div>
+                        <div class="form-group">
+                            <label for="label">标签</label>
+                            <input type="text" class="form-control" id="label" placeholder="" name="label">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">描述</label>
+                            <input type="text" class="form-control" id="description" placeholder="" name="description">
+                        </div>
+                        <div class="form-group">
+                            <label for="remark">备注</label>
+                            <input type="text" class="form-control" id="remark" placeholder="" name="remark">
+                        </div>
+                        <div class="form-group">
+                            <label for="year">年份</label>
+                            <input type="text" class="form-control" id="year" placeholder="" name="year">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateTime">更新时间</label>
+                            <input type="text" class="form-control" id="updateTime" placeholder="" name="updateTime">
+                        </div>
+                        <div class="form-group">
+                            <label for="number">集数</label>
+                            <input type="text" class="form-control" id="number" placeholder="" name="number">
+                        </div>
+                        <div class="form-group">
+                            <label for="popularity">人气</label>
+                            <input type="text" class="form-control" id="popularity" placeholder="" name="popularity">
+                        </div>
+                        <div class="form-group">
+                            <label for="url">外部链接</label>
+                            <input type="text" class="form-control" id="url" placeholder="" name="url">
+                        </div>
+<%--                    </c:forEach>--%>
                 </div>
             </div>
             <div class="modal-footer">
@@ -203,29 +206,33 @@
     </div>
 </div>
 
-<!-- 分页 -->
-<nav aria-label="Page navigation">
-    <ul class="pagination">
-        <li>
-            <a href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li>
-            <a href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
+<!--分页-->
+<nav aria-label="Page navigation" style="text-align: center">
+    <ul class="pagination pagination-lg">
+        <li><a href="manage/comic?currentPage=1">首页</a></li>
+        <c:if test="${requestScope.pageInfo.currentPage > 1}">
+            <li>
+                <a href="manage/comic?currentPage=${requestScope.pageInfo.currentPage - 1}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        </c:if>
+        <c:forEach items="${requestScope.arr}" var="num">
+            <li><a href="manage/comic?currentPage=${num}">${num}</a></li>
+        </c:forEach>
+        <c:if test="${requestScope.pageInfo.currentPage < requestScope.pageInfo.pageNum}">
+            <li>
+                <a href="manage/comic?currentPage=${requestScope.pageInfo.currentPage + 1}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </c:if>
+        <li><a href="manage/comic?currentPage=${requestScope.pageInfo.pageNum}">末页</a></li>
     </ul>
 </nav>
 
-<script src="../static/jquery-3.5.1/jquery-3.5.1.js"></script>
-<script src="../static/bootstrap-3.4.1-dist/js/bootstrap.js"></script>
+<script src="static/jquery-3.5.1/jquery-3.5.1.js"></script>
+<script src="static/bootstrap-3.4.1-dist/js/bootstrap.js"></script>
 
 <script>
     $(function () {
@@ -244,11 +251,11 @@
             $("#myModalLabel").text("新建用户");
 
         });
-    };
+    }
 
     // 点击修改
     function editFunc() {
-        $("#btnEdit").click(function () {
+        $(".btnEdit").click(function () {
             // 将模态框显示出来
             $("#myModal").modal("show");
             // 更改标题,先清空内容再更改
@@ -259,7 +266,7 @@
 
     // 点击删除
     function deleteFunc() {
-        $("#btnDelete").click(function () {
+        $(".btnDelete").click(function () {
             //显示删除对话框
             $("#deleteModal").modal('show');
 
@@ -267,7 +274,6 @@
             // DELETE_ID = $(this).attr("uid");
         })
     }
-
 </script>
 </body>
 </html>
