@@ -37,14 +37,14 @@ public class AdminLoginServlet extends HttpServlet {
         }
         session.removeAttribute("validCode");
         Admin admin = userService.loginAdmin(adminName, password);
-//        PrintWriter out = resp.getWriter();
+        PrintWriter out = resp.getWriter();
         if (admin != null) {
             session.setAttribute("admin", admin);
-//            out.print(true);
-            req.getRequestDispatcher("manage/manage.do").forward(req, resp);
+            out.print("true");
+//            req.getRequestDispatcher("manage/manage.do").forward(req, resp);
         }else {
-//            out.print(false);
-            resp.sendRedirect("admin/admin_login.do");
+            out.print("false");
+//            resp.sendRedirect("admin/admin_login.do");
         }
     }
 }

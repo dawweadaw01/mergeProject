@@ -48,11 +48,11 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">管理员 <span class="caret"></span></a>
+                       aria-expanded="false">${sessionScope.admin.adminName} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">个人信息</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">注销</a></li>
+                        <li><a href="admin/AdminLogout">注销</a></li>
                     </ul>
                 </li>
             </ul>
@@ -97,10 +97,10 @@
                     <td>${user.collection}</td>
                     <td>${user.history}</td>
                     <td>
-                        <button class="btn btn-warning btnEdit"><span
+                        <button uid="${user.id}" class="btn btn-warning btnEdit"><span
                                 class="iconfont icon-xiugai"></span>修改
                         </button>
-                        <button class="btn btn-danger btnDelete"><span
+                        <button uid="${user.id}" class="btn btn-danger btnDelete"><span
                                 class="iconfont icon-shanchu"></span>删除
                         </button>
                     </td>
@@ -126,23 +126,23 @@
                     <form id="form">
                         <div class="form-group">
                             <label for="username">用户名</label>
-                            <input type="text" class="form-control" id="username" placeholder="请输入用户名">
+                            <input type="text" class="form-control" id="username" placeholder="请输入用户名" name="username">
                         </div>
                         <div class="form-group">
                             <label for="password">密码</label>
-                            <input type="password" class="form-control" id="password" placeholder="请输入密码">
+                            <input type="password" class="form-control" id="password" placeholder="请输入密码" name="password">
                         </div>
                         <div class="form-group">
                             <label for="avatar">头像</label>
-                            <input type="file" id="avatar">
+                            <input type="file" id="avatar" name="avatar">
                         </div>
                         <div class="form-group">
                             <label for="email">邮箱</label>
-                            <input type="email" class="form-control" id="email" placeholder="请输入邮箱">
+                            <input type="email" class="form-control" id="email" placeholder="请输入邮箱" name="email">
                         </div>
                         <div class="form-group">
                             <label for="phone">手机号</label>
-                            <input type="text" class="form-control" id="phone" placeholder="请输入邮箱">
+                            <input type="text" class="form-control" id="phone" placeholder="请输入邮箱" name="phone">
                         </div>
                     </form>
                 </div>
@@ -223,6 +223,9 @@
             // 更改标题,先清空内容再更改
             $("#myModalLabel").text("");
             $("#myModalLabel").text("修改用户");
+            // 获取对应的uid
+            var uid = $('.btnEdit').attr('uid');
+            console.log(uid);
         });
     }
 

@@ -32,7 +32,7 @@
             <h1>注册</h1>
         </div>
         <!-- 输入框盒子 -->
-        <form id="registerForm" method="post" action="register" enctype="multipart/form-data" accept-charset="UTF-8">
+        <form id="registerForm" action="register" enctype="multipart/form-data" method="post">
             <div class="input-box">
                 <input type="text" placeholder="用户名" name="username" id="username1">
                 <input type="email" placeholder="邮箱" name="email" id="email">
@@ -56,14 +56,14 @@
             <h1>登录</h1>
         </div>
         <!-- 输入框盒子 -->
-        <form id="loginForm" method="post" action="login">
+        <form id="loginForm">
             <div class="input-box">
                 <input type="text" placeholder="用户名" name="username" id="username">
                 <input type="password" placeholder="密码" name="password" id="password">
             </div>
             <!-- 按钮盒子 -->
             <div class="btn-box">
-                <button type="submit" id="login">登录</button>
+                <button type="button" id="login">登录</button>
                 <!-- 绑定点击事件 -->
                 <p onclick="mySwitch()">没有账号?去注册</p>
             </div>
@@ -102,19 +102,18 @@
     // 书写函数封装
     $(function () {
         // 点击登录出现验证码框
-        // btnSlide();
-        //滑块验证码的函数
-        slideFunc();
-        // 登录函数
-        // loginFunc();
+        btnSlide();
+        // 注册函数
+        // registerFunc();
     });
 
     // 点击登录出现验证码框
-    // function btnSlide() {
-    //     $("#login").click(function () {
-    //         $('#myModal').modal('show');
-    //     });
-    // }
+    function btnSlide() {
+        $("#login").click(function () {
+            $('#myModal').modal('show');
+        });
+        slideFunc();
+    }
 
     // 滑块验证码的函数
     function slideFunc() {
@@ -139,8 +138,9 @@
             ready: function () {
             },
             success: function () {
-                alert('验证成功，添加你自己的代码！');
+                // alert('验证成功，添加你自己的代码！');
                 //......后续操作
+                loginFunc();
             },
             error: function () {
                 alert('验证失败！');
@@ -150,52 +150,80 @@
     }
 
     //登录函数
-    // function loginFunc() {
-    //     $("#btnSave").click(function () {
-    //         let username = $("#loginForm #username").val();
-    //         let password = $("#loginForm #password").val();
-    //         // console.log(username + " " + password);
+    function loginFunc() {
+        $("#btnSave").click(function () {
+            let username = $("#loginForm #username").val();
+            let password = $("#loginForm #password").val();
+            // console.log(username + " " + password);
+            $.ajax({
+                url: "login",
+                type: "post",
+                //接收的数据
+                data: {
+                    'username': username,
+                    'password': password,
+                },
+                success: function (res) {
+                    if (res !== "false") {
+                        window.location.href = "/user/test2.do";
+                    } else {
+                        alert("登录失败！");
+                        console.log(res);
+                        // 刷新页面
+                        location.reload();
+                    }
+                }
+            });
+        });
+    }
+
+    // 注册函数
+    // function registerFunc() {
+    //     $('#register').click(function () {
+    //         let username1 = $('#username1').val();
+    //         let password1 = $('#password1').val();
+    //         let email = $('#email').val();
+    //         let phone = $('#phone').val();
+    //         let photo = $('#photo').val();
     //         $.ajax({
-    //             url: "login",
-    //             type: "post",
-    //             dataType: 'jsonp',  // 请求方式为jsonp
-    //             crossDomain: true,
-    //             //接收的数据
-    //             data: JSON.stringify({
-    //                 username: username,
-    //                 password: password,
-    //             }),
-    //             // 定义发送请求的数据格式为JSON字符串
-    //             contentType: "application/json;charset=UTF-8",
-    //             //定义回调响应的数据格式为JSON字符串,该属性可以省略
-    //             // dataType: "json",
-    //             success: function (data) {
-    //                 if (data != null) {
-    //                     console.log(data);
+    //             url: 'register',
+    //             type: 'post',
+    //             data: {
+    //                 'username': username1,
+    //                 'password': password1,
+    //                 'email': email,
+    //                 'phone': phone,
+    //                 'photo': photo,
+    //             },
+    //             contentType: false, // 提交给服务端的数据类型，不要当成字符串处理
+    //             processData:false, // 通过请求发送的数据是否转换为查询字符串
+    //             success: function (res) {
+    //                 if (res !== "false") {
+    //                     window.location.href = "user/user_login.do";
+    //                 } else {
+    //                     alert("有问题");
     //                 }
     //             }
     //         });
     //     });
-    //
     // }
 </script>
-
-<!-- 下面是页面的JS代码 -->
 <script>
     // 滑动的状态
     let flag = true;
+    let box = $(".pre-box");
     const mySwitch = () => {
         if (flag) {
             // 获取到滑动盒子的dom元素并修改它移动的位置
-            $(".pre-box").css("transform", "translateX(100%)");
+            box.css("transform", "translateX(100%)");
             // 获取到滑动盒子的dom元素并修改它的背景颜色
-            $(".pre-box").css("background-color", "#c9e0ed");
+            box.css("background-color", "#c9e0ed");
             //修改图片的路径
             $("img").attr("src", "static/img/wuwu.jpeg");
 
         } else {
-            $(".pre-box").css("transform", "translateX(0%)");
-            $(".pre-box").css("background-color", "#edd4dc");
+            box.css("transform", "translateX(0%)");
+            box.css("background-color", "#edd4dc");
             $("img").attr("src", "static/img/waoku.jpg");
         }
         flag = !flag;

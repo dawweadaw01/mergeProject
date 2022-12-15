@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -30,7 +31,9 @@ public class UserRegisterServlet extends HttpServlet {
     UserService userService = new UserServiceImpl();
 
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
+        resp.setContentType("multipart/form-data; charset=UTF-8");
         User user = null;
         //配置保存位置
         String path = "/photo";
@@ -78,7 +81,13 @@ public class UserRegisterServlet extends HttpServlet {
         } catch (Exception e) {
             System.out.println("文件上传失败" + e.getMessage());
         }
+        PrintWriter out = resp.getWriter();
         userService.insert(user);
+//        if(userService.insert(user) == 1){
+//            out.write("true");
+//        }else{
+//            out.write("false");
+//        }
         resp.sendRedirect("/user/user_login.do");
     }
 }

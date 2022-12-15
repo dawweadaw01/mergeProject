@@ -140,7 +140,8 @@ form .input-box {
 }
 
 /* 输入框 */
-form .input-box input {
+form .input-box #username, #username1, #password, #password1,
+#email, #phone{
     width: 60%;
     height: 40px;
     margin-bottom: 20px;
@@ -150,6 +151,9 @@ form .input-box input {
     border-radius: 120px;
     /* 增加磨砂质感 */
     backdrop-filter: blur(10px);
+}
+input[type=file]{
+    margin-bottom: 20px;
 }
 
 input:focus {

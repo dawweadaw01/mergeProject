@@ -48,11 +48,11 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">管理员 <span class="caret"></span></a>
+                       aria-expanded="false">${sessionScope.admin.adminName} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">个人信息</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">注销</a></li>
+                        <li><a href="admin/AdminLogout">注销</a></li>
                     </ul>
                 </li>
             </ul>

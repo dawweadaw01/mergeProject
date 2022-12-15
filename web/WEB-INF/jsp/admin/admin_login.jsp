@@ -26,13 +26,13 @@
             <div class="arm arm-r"></div>
         </div>
     </div>
-    <form id="form" method="post" action="AdminLogin"> <!--   method="post" action="AdminLogin"  -->
+    <form id="form"> <!--   method="post" action="AdminLogin"  -->
         <div class="input-box">
             <input type="text" placeholder="账号" id="adminName" name="adminName">
             <input type="password" placeholder="密码" id="password" name="password">
             <input type="text" placeholder="请输入验证码" id="validCode" name="validCode">
             <img src="validCode" alt="验证码图片" id="validImg">
-            <button type="submit" id="login">登录</button>
+            <button type="button" id="login">登录</button>
         </div>
     </form>
 </div>
@@ -47,7 +47,7 @@
             // 密码框失去焦点，移除样式.password
             $('#owl').removeClass('password');
         })
-        // login();
+        login();
         updateImg();
     })
 
@@ -72,31 +72,30 @@
     }
 
     // 写登录函数
-    // function login() {
-    //     $('#login').click(function () {
-    //         let adminName = $("#form #adminName").val();
-    //         let password = $("#form #password").val();
-    //         let validCode = $('#form #validCode').val();
-    //         $.ajax({
-    //             url: "AdminLogin",
-    //             type: "post",
-    //             data: {
-    //                 'adminName': adminName,
-    //                 'password': password,
-    //                 'validCode': validCode
-    //             },
-    //             dataType: "text",
-    //             success: function (data) {
-    //                 console.log(data);
-    //                 if (data !== false) {
-    //                     window.location.href = "manage/manage.do";
-    //                 }else{
-    //                     alert("用户名或者密码错误");
-    //                 }
-    //             }
-    //         });
-    //     });
-    // }
+    function login() {
+        $('#login').click(function () {
+            let adminName = $("#form #adminName").val();
+            let password = $("#form #password").val();
+            let validCode = $('#form #validCode').val();
+            $.ajax({
+                url: "AdminLogin",
+                type: "post",
+                data: {
+                    'adminName': adminName,
+                    'password': password,
+                    'validCode': validCode
+                },
+                success: function (data) {
+                    if (data !== "false") {
+                        window.location.href = "manage/manage.do";
+                    }else{
+                        alert("用户名或者密码错误");
+                        $('input').val('');
+                    }
+                }
+            });
+        });
+    }
 
 </script>
 </body>

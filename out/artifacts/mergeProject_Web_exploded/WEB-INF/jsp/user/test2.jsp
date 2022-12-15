@@ -6,7 +6,7 @@
     <title>Title</title>
 </head>
 <body>
-userNae: ${user.userNae}
+userName: ${user.userName}
 头像: <img alt="" width="80" height="80" src="${pageContext.request.contextPath}${user.avatar}"/>
 email: ${user.email}
 phone: ${user.phone}

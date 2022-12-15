@@ -4,6 +4,7 @@ import cdu.zch.model.User;
 import cdu.zch.service.UserService;
 import cdu.zch.service.impl.UserServiceImpl;
 import cdu.zch.util.PageInfo;
+import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet("/manage/user")
@@ -20,8 +22,10 @@ public class UserListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        resp.setCharacterEncoding("utf-8");
+        req.setCharacterEncoding("utf-8");
+//        resp.setContentType("text/html");
+//        resp.setCharacterEncoding("utf-8");
+        resp.setContentType("text/json;charset=utf-8");
 
         // 得到总数据条数
         int count = userService.countUser();
@@ -56,6 +60,10 @@ public class UserListServlet extends HttpServlet {
             arr[i] = i + 1;
         }
         req.setAttribute("arr", arr);
+
+        PrintWriter out = resp.getWriter();
+        String json = new Gson().toJson(userList);
+        out.write(json);
 
         req.getRequestDispatcher("user_manage.do").forward(req, resp);
     }

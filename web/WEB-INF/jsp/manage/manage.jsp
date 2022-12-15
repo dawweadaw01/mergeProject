@@ -52,7 +52,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="#">个人信息</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">注销</a></li>
+                        <li><a href="admin/AdminLogout">注销</a></li>
                     </ul>
                 </li>
             </ul>
@@ -63,7 +63,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">Panel heading without title</div>
     <div class="panel-body">
-        Panel content
+        <div id="m1" style="width: 1000px; height: 600px;"></div>
     </div>
 </div>
 
@@ -89,5 +89,132 @@
 
 <script src="static/jquery-3.5.1/jquery-3.5.1.js"></script>
 <script src="static/bootstrap-3.4.1-dist/js/bootstrap.js"></script>
+<script src="static/echarts/echarts.js"></script>
+
+<script>
+    $(function (){
+       init();
+    });
+
+    function init(){
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('m1'));
+
+
+        option = {
+            title: {
+                text: 'Stacked Area Chart'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#6a7985'
+                    }
+                }
+            },
+            legend: {
+                // data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    boundaryGap: false,
+                    // data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: 'Email',
+                    type: 'line',
+                    stack: 'Total',
+                    areaStyle: {},
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    // data: [120, 132, 101, 134, 90, 230, 210]
+                },
+                {
+                    name: 'Union Ads',
+                    type: 'line',
+                    stack: 'Total',
+                    areaStyle: {},
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    // data: [220, 182, 191, 234, 290, 330, 310]
+                },
+                {
+                    name: 'Video Ads',
+                    type: 'line',
+                    stack: 'Total',
+                    areaStyle: {},
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    // data: [150, 232, 201, 154, 190, 330, 410]
+                },
+                {
+                    name: 'Direct',
+                    type: 'line',
+                    stack: 'Total',
+                    areaStyle: {},
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    // data: [320, 332, 301, 334, 390, 330, 320]
+                },
+                {
+                    name: 'Search Engine',
+                    type: 'line',
+                    stack: 'Total',
+                    label: {
+                        show: true,
+                        position: 'top'
+                    },
+                    areaStyle: {},
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    // data: [820, 932, 901, 934, 1290, 1330, 1320]
+                }
+            ]
+        };
+
+        $.ajax({
+            url: "testEcharts",
+            type: "GET",
+            success: function (res) {
+                // 获取后台数据,已经转为JSON格式
+                // console.log(JSON.parse(res));
+                // 将数据渲染上去
+                option.legend.data = JSON.parse(res).legendData;
+                option.xAxis[0].data = JSON.parse(res).xAxisData;
+                $.each(JSON.parse(res).seriesData, function (index, value){
+                    option.series[index].data = value;
+                });
+                myChart.setOption(option);
+            }
+        })
+    }
+
+</script>
 </body>
 </html>
