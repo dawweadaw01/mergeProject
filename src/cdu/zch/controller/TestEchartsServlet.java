@@ -91,12 +91,14 @@ public class TestEchartsServlet extends HttpServlet {
         list.add(l3);
         list.add(l4);
         list.add(l5);
-        Map<String, Object> json = new HashMap<>();
-        json.put("legendData", legendData);
-        json.put("xAxisData", xAxisData);
-        json.put("seriesData", list);
+        Map<String, Object> json1 = new HashMap<>();
+        json1.put("legendData", legendData);
+        json1.put("xAxisData", xAxisData);
+        json1.put("seriesData", list);
 
-        String Json = new Gson().toJson(json);
+
+
+        String Json = new Gson().toJson(json1);
         PrintWriter out = resp.getWriter();
         out.write(Json);
     }

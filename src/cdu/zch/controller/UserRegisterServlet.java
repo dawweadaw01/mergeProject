@@ -25,7 +25,7 @@ import java.util.List;
  * ps：传入的数据请一定使用二进制传入，例如：multipart/form-data
  * 请在from表单中设置
  */
-@WebServlet("/register")
+@WebServlet("/user/register")
 public class UserRegisterServlet extends HttpServlet {
 
     UserService userService = new UserServiceImpl();
@@ -82,12 +82,12 @@ public class UserRegisterServlet extends HttpServlet {
             System.out.println("文件上传失败" + e.getMessage());
         }
         PrintWriter out = resp.getWriter();
-        userService.insert(user);
-//        if(userService.insert(user) == 1){
-//            out.write("true");
-//        }else{
-//            out.write("false");
-//        }
-        resp.sendRedirect("/user/user_login.do");
+//        userService.insert(user);
+        if(userService.insert(user) == 1){
+            out.write("true");
+        }else{
+            out.write("false");
+        }
+//        resp.sendRedirect("/user/user_login.do");
     }
 }

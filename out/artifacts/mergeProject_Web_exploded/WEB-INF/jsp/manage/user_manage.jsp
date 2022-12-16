@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="myfn" uri="http://cdu/functions" %>
 <html>
 <head>
     <base href="http://${header.host}${pageContext.request.contextPath}/"/>
@@ -90,17 +91,17 @@
                     <th scope="row">${user.id}</th>
                     <td>${user.userName}</td>
                     <td>${user.password}</td>
-                    <td>${user.avatar}</td>
+                    <td><img src="${user.avatar}" alt="" style="width: 45px; height: 45px;"></td>
                     <td>${user.email}</td>
                     <td>${user.phone}</td>
-                    <td>${user.createTime}</td>
+                    <td>${myfn:formatDate(user.createTime)}</td>
                     <td>${user.collection}</td>
                     <td>${user.history}</td>
                     <td>
-                        <button uid="${user.id}" class="btn btn-warning btnEdit"><span
+                        <button id="${user.id}" class="btn btn-warning btnEdit "><span
                                 class="iconfont icon-xiugai"></span>修改
                         </button>
-                        <button uid="${user.id}" class="btn btn-danger btnDelete"><span
+                        <button id="${user.id}" class="btn btn-danger btnDelete"><span
                                 class="iconfont icon-shanchu"></span>删除
                         </button>
                     </td>
@@ -126,11 +127,13 @@
                     <form id="form">
                         <div class="form-group">
                             <label for="username">用户名</label>
-                            <input type="text" class="form-control" id="username" placeholder="请输入用户名" name="username">
+                            <input type="text" class="form-control" id="username" placeholder="请输入用户名"
+                                   name="username">
                         </div>
                         <div class="form-group">
                             <label for="password">密码</label>
-                            <input type="password" class="form-control" id="password" placeholder="请输入密码" name="password">
+                            <input type="password" class="form-control" id="password" placeholder="请输入密码"
+                                   name="password">
                         </div>
                         <div class="form-group">
                             <label for="avatar">头像</label>
@@ -199,10 +202,62 @@
 
 <script>
     $(function () {
-        addFunc();
-        editFunc();
-        deleteFunc();
+        // 初始化渲染页面
+        // init();
+        // 这里必须 要等待页面渲染之后才能调用下方的函数
+        window.onload = function (){
+            addFunc();
+            editFunc();
+            deleteFunc();
+        }
     })
+
+    // 初始化渲染页面
+    // function init() {
+    //     $.ajax({
+    //         url: 'manage/user',
+    //         type: 'get',
+    //         data: {},
+    //         success: function (res) {
+    //             // console.log(res);
+    //             var tr;
+    //             var th;
+    //             var td;
+    //             $.each(res.userList, function (index, value) {
+    //                 tr = $('<tr></tr>');
+    //                 th = $('<th scope="row">' + value.id + '</th>');
+    //                 tr.append(th);
+    //                 td = $('<td>' + value.userName + '</td>');
+    //                 tr.append(td);
+    //                 td = $('<td>' + value.password + '</td>');
+    //                 tr.append(td);
+    //                 td = $('<td><img src=' + value.avatar + '  alt="头像" style="width: 45px; height: 45px;"></td>');
+    //                 tr.append(td);
+    //                 td = $('<td>' + value.email + '</td>');
+    //                 tr.append(td);
+    //                 td = $('<td>' + value.phone + '</td>');
+    //                 tr.append(td);
+    //                 td = $('<td>' + value.createTime + '</td>');
+    //                 tr.append(td);
+    //                 td = $('<td>' + value.history + '</td>');
+    //                 tr.append(td);
+    //                 td = $('<td>' + value.collection + '</td>');
+    //                 tr.append(td);
+    //                 td = $('<td><button id=' + value.id + ' class="btn btn-warning btnEdit">' +
+    //                     '<span class="iconfont icon-xiugai"></span>修改</button>' +
+    //                     '<button id=' + value.id + ' class="btn btn-danger btnDelete">' +
+    //                     '<span class="iconfont icon-shanchu"></span>删除</button>' +
+    //                     '</td>');
+    //                 tr.append(td);
+    //                 $('tbody').append(tr);
+    //             });
+    //             var li1 = $('<li><a href=manage/user?currentPage=1>首页</a></li>');
+    //             var li2 = $('<li><a href=manage/user?currentPage=' + res.pageInfo.pageNum +' >末页</a></li>');
+    //             $('.pagination').append(li1);
+    //             $('.pagination').append(li2);
+    //         }
+    //     });
+    // }
 
     // 点击新建
     function addFunc() {
@@ -211,8 +266,32 @@
             $("#myModal").modal("show");
             // 更改标题
             $("#myModalLabel").text("新建用户");
-
+            doAdd();
         });
+    }
+    // 添加用户,点击新建中的确认按钮触发
+    function doAdd(){
+        $('#btnSave').click(function (){
+            let formData = new FormData($('#form')[0]);
+            // console.log(formData);
+            $.ajax({
+                // 这里和注册是一样的就直接用注册的接口了
+                url: 'user/register',
+                type: 'post',
+                data: formData,
+                contentType: false, // 提交给服务端的数据类型，不要当成字符串处理
+                processData:false, // 通过请求发送的数据是否转换为查询字符串
+                success: function (res){
+                    if (res === "true") {
+                        window.location.href = "manage/user_manage.do";
+                    } else {
+                        alert("出现问题！请重新来过！");
+                        location.reload();
+                    }
+                }
+            });
+        })
+
     }
 
     // 点击修改
@@ -223,21 +302,62 @@
             // 更改标题,先清空内容再更改
             $("#myModalLabel").text("");
             $("#myModalLabel").text("修改用户");
-            // 获取对应的uid
-            var uid = $('.btnEdit').attr('uid');
-            console.log(uid);
+            // 获取对应的id
+            let id = $(this).attr('id');
+            // console.log(id);
+            $.ajax({
+                url: 'test',
+                type: 'get',
+                data: {
+                    id,
+                },
+                success: function (res){
+                    if(res !== 'false'){
+                        console.log(res);
+                         $('#username').val(res.user.userName);
+                         $('#password').val(res.user.password);
+                         $('#email').val(res.user.email);
+                         $('#phone').val(res.user.phone);
+                    }else{
+                        alert("有问题！");
+                    }
+                }
+            });
         });
     }
+    // 修改函数
+
 
     // 点击删除
     function deleteFunc() {
         $(".btnDelete").click(function () {
             //显示删除对话框
             $("#deleteModal").modal('show');
-
-            //获取当前行的id病赋给全局变量
-            // DELETE_ID = $(this).attr("uid");
+            var id = $(this).attr('id');
+            doDel(id);
         })
+    }
+
+    // 做删除方法
+    function doDel(id){
+        $('#btnConfirmDelete').click(function (){
+            console.log(id);
+           $.ajax({
+               url: 'user/delete',
+               type: 'get',
+               data: {
+                   id,
+               },
+               success: function (res){
+                   console.log(res);
+                   if(res === "true"){
+                       location.reload();
+                   }else{
+                       alert("好像出问题了，不能删除！");
+                   }
+               }
+           });
+        });
     }
 
 </script>

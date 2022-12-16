@@ -16,7 +16,7 @@ import java.io.PrintWriter;
 /**
  * 登录类，用于登录，并将得到的user存入到session中
  */
-@WebServlet("/login")
+@WebServlet("/user/login")
 public class UserLoginServlet extends HttpServlet {
 
     UserService userService = new UserServiceImpl();

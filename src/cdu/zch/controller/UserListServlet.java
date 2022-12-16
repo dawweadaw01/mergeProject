@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet("/manage/user")
 public class UserListServlet extends HttpServlet {
@@ -60,10 +62,13 @@ public class UserListServlet extends HttpServlet {
             arr[i] = i + 1;
         }
         req.setAttribute("arr", arr);
-
-        PrintWriter out = resp.getWriter();
-        String json = new Gson().toJson(userList);
-        out.write(json);
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("userList", userList);
+//        map.put("pageInfo", pageInfo);
+//        map.put("arr", arr);
+//        PrintWriter out = resp.getWriter();
+//        String json = new Gson().toJson(map);
+//        out.print(json);
 
         req.getRequestDispatcher("user_manage.do").forward(req, resp);
     }

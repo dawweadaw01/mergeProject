@@ -32,7 +32,7 @@
             <h1>注册</h1>
         </div>
         <!-- 输入框盒子 -->
-        <form id="registerForm" action="register" enctype="multipart/form-data" method="post">
+        <form id="registerForm">
             <div class="input-box">
                 <input type="text" placeholder="用户名" name="username" id="username1">
                 <input type="email" placeholder="邮箱" name="email" id="email">
@@ -42,7 +42,7 @@
             </div>
             <!-- 按钮盒子 -->
             <div class="btn-box">
-                <button id="register" type="submit">注册</button>
+                <button id="register" type="button">注册</button>
                 <!-- 绑定点击事件 -->
                 <p onclick="mySwitch()">已有账号?去登录</p>
             </div>
@@ -104,7 +104,7 @@
         // 点击登录出现验证码框
         btnSlide();
         // 注册函数
-        // registerFunc();
+        registerFunc();
     });
 
     // 点击登录出现验证码框
@@ -156,7 +156,7 @@
             let password = $("#loginForm #password").val();
             // console.log(username + " " + password);
             $.ajax({
-                url: "login",
+                url: "user/login",
                 type: "post",
                 //接收的数据
                 data: {
@@ -178,35 +178,27 @@
     }
 
     // 注册函数
-    // function registerFunc() {
-    //     $('#register').click(function () {
-    //         let username1 = $('#username1').val();
-    //         let password1 = $('#password1').val();
-    //         let email = $('#email').val();
-    //         let phone = $('#phone').val();
-    //         let photo = $('#photo').val();
-    //         $.ajax({
-    //             url: 'register',
-    //             type: 'post',
-    //             data: {
-    //                 'username': username1,
-    //                 'password': password1,
-    //                 'email': email,
-    //                 'phone': phone,
-    //                 'photo': photo,
-    //             },
-    //             contentType: false, // 提交给服务端的数据类型，不要当成字符串处理
-    //             processData:false, // 通过请求发送的数据是否转换为查询字符串
-    //             success: function (res) {
-    //                 if (res !== "false") {
-    //                     window.location.href = "user/user_login.do";
-    //                 } else {
-    //                     alert("有问题");
-    //                 }
-    //             }
-    //         });
-    //     });
-    // }
+    function registerFunc() {
+        $('#register').click(function () {
+            // 得到form表单的数据
+            let formData = new FormData($('#registerForm')[0]);
+            $.ajax({
+                url: 'user/register',
+                type: 'post',
+                data: formData,
+                contentType: false, // 提交给服务端的数据类型，不要当成字符串处理
+                processData:false, // 通过请求发送的数据是否转换为查询字符串
+                success: function (res) {
+                    if (res === "true") {
+                        window.location.href = "user/user_login.do";
+                    } else {
+                        alert("出现问题！请重新来过！");
+                        location.reload();
+                    }
+                }
+            });
+        });
+    }
 </script>
 <script>
     // 滑动的状态

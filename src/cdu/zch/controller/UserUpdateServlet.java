@@ -15,11 +15,13 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/test")
-public class Test extends HttpServlet {
+@WebServlet("/user/update")
+public class UserUpdateServlet extends HttpServlet {
+
+    UserService userService = new UserServiceImpl();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserService userService = new UserServiceImpl();
         req.setCharacterEncoding("utf-8");
         resp.setContentType("text/json;charset=utf-8");
         PrintWriter out = resp.getWriter();
@@ -38,4 +40,9 @@ public class Test extends HttpServlet {
             out.write("false");
         }
     }
+
+//    @Override
+//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        super.doPost(req, resp);
+//    }
 }
