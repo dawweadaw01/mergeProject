@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 @WebServlet("/manage/admin")
@@ -56,6 +57,7 @@ public class AdminListServlet extends HttpServlet {
             arr[i] = i + 1;
         }
         req.setAttribute("arr", arr);
+        System.out.println(Arrays.toString(arr));
 
         req.getRequestDispatcher("admin_manage.do").forward(req, resp);
     }

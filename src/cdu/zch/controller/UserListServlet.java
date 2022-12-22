@@ -4,7 +4,6 @@ import cdu.zch.model.User;
 import cdu.zch.service.UserService;
 import cdu.zch.service.impl.UserServiceImpl;
 import cdu.zch.util.PageInfo;
-import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,10 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @WebServlet("/manage/user")
 public class UserListServlet extends HttpServlet {
@@ -51,6 +47,7 @@ public class UserListServlet extends HttpServlet {
 
         // 渲染到页面上
         req.setAttribute("userList", userList);
+        System.out.println(userList);
 
         // 计算出总页面数，设置到页面上
         pageInfo.setCount(count);
@@ -62,13 +59,6 @@ public class UserListServlet extends HttpServlet {
             arr[i] = i + 1;
         }
         req.setAttribute("arr", arr);
-//        Map<String, Object> map = new HashMap<>();
-//        map.put("userList", userList);
-//        map.put("pageInfo", pageInfo);
-//        map.put("arr", arr);
-//        PrintWriter out = resp.getWriter();
-//        String json = new Gson().toJson(map);
-//        out.print(json);
 
         req.getRequestDispatcher("user_manage.do").forward(req, resp);
     }

@@ -25,15 +25,16 @@ import java.util.List;
  * ps：传入的数据请一定使用二进制传入，例如：multipart/form-data
  * 请在from表单中设置
  */
-@WebServlet("/user/register")
+@WebServlet("/register")
 public class UserRegisterServlet extends HttpServlet {
 
     UserService userService = new UserServiceImpl();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("utf-8");
+        req.setCharacterEncoding("UTF-8");
         resp.setContentType("multipart/form-data; charset=UTF-8");
+
         User user = null;
         //配置保存位置
         String path = "/photo";

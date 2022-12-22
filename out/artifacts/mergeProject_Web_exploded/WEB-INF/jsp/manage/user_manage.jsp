@@ -126,6 +126,10 @@
                 <div class="panel-body">
                     <form id="form">
                         <div class="form-group">
+                            <label for="uid">编号</label>
+                            <input type="text" class="form-control" id="uid" name="id" readonly>
+                        </div>
+                        <div class="form-group">
                             <label for="username">用户名</label>
                             <input type="text" class="form-control" id="username" placeholder="请输入用户名"
                                    name="username">
@@ -205,7 +209,7 @@
         // 初始化渲染页面
         // init();
         // 这里必须 要等待页面渲染之后才能调用下方的函数
-        window.onload = function (){
+        window.onload = function () {
             addFunc();
             editFunc();
             deleteFunc();
@@ -266,24 +270,30 @@
             $("#myModal").modal("show");
             // 更改标题
             $("#myModalLabel").text("新建用户");
+            $("#uid").val("");
+            $('#username').val("");
+            $('#password').val("");
+            $('#email').val("");
+            $('#phone').val("");
             doAdd();
         });
     }
+
     // 添加用户,点击新建中的确认按钮触发
-    function doAdd(){
-        $('#btnSave').click(function (){
+    function doAdd() {
+        $('#btnSave').click(function () {
             let formData = new FormData($('#form')[0]);
-            // console.log(formData);
+            console.log(formData);
             $.ajax({
                 // 这里和注册是一样的就直接用注册的接口了
-                url: 'user/register',
+                url: 'register',
                 type: 'post',
                 data: formData,
                 contentType: false, // 提交给服务端的数据类型，不要当成字符串处理
-                processData:false, // 通过请求发送的数据是否转换为查询字符串
-                success: function (res){
+                processData: false, // 通过请求发送的数据是否转换为查询字符串
+                success: function (res) {
                     if (res === "true") {
-                        window.location.href = "manage/user_manage.do";
+                        location.reload();
                     } else {
                         alert("出现问题！请重新来过！");
                         location.reload();
@@ -303,30 +313,54 @@
             $("#myModalLabel").text("");
             $("#myModalLabel").text("修改用户");
             // 获取对应的id
-            let id = $(this).attr('id');
-            // console.log(id);
+            var id = $(this).attr('id');
             $.ajax({
-                url: 'test',
+                url: 'update',
                 type: 'get',
                 data: {
                     id,
                 },
-                success: function (res){
-                    if(res !== 'false'){
-                        console.log(res);
-                         $('#username').val(res.user.userName);
-                         $('#password').val(res.user.password);
-                         $('#email').val(res.user.email);
-                         $('#phone').val(res.user.phone);
-                    }else{
+                success: function (res) {
+                    if (res !== 'false') {
+                        // console.log(res);
+                        $('#uid').val(res.user.id);
+                        $('#username').val(res.user.userName);
+                        $('#password').val(res.user.password);
+                        $('#email').val(res.user.email);
+                        $('#phone').val(res.user.phone);
+                    } else {
                         alert("有问题！");
+                    }
+                }
+            });
+
+        });
+        // 修改
+        doEdit();
+    }
+
+    // 修改函数
+    function doEdit() {
+        $('#btnSave').click(function () {
+            let formData = new FormData($('#form')[0]);
+            console.log(formData);
+            $.ajax({
+                url: 'update',
+                type: 'post',
+                data: formData,
+                contentType: false, // 提交给服务端的数据类型，不要当成字符串处理
+                processData: false, // 通过请求发送的数据是否转换为查询字符串
+                success: function (res) {
+                    // console.log(res);
+                    if (res === 'true') {
+                        location.reload();
+                    } else {
+                        alert('修改失败！请刷新来过');
                     }
                 }
             });
         });
     }
-    // 修改函数
-
 
     // 点击删除
     function deleteFunc() {
@@ -339,24 +373,25 @@
     }
 
     // 做删除方法
-    function doDel(id){
-        $('#btnConfirmDelete').click(function (){
-            console.log(id);
-           $.ajax({
-               url: 'user/delete',
-               type: 'get',
-               data: {
-                   id,
-               },
-               success: function (res){
-                   console.log(res);
-                   if(res === "true"){
-                       location.reload();
-                   }else{
-                       alert("好像出问题了，不能删除！");
-                   }
-               }
-           });
+    function doDel(id) {
+        $('#btnConfirmDelete').click(function () {
+            // console.log(id);
+            $.ajax({
+                url: 'delete',
+                type: 'get',
+                data: {
+                    id,
+                },
+                success: function (res) {
+                    console.log(res);
+                    if (res === "true") {
+                        alert("删除成功！");
+                        location.reload();
+                    } else {
+                        alert("好像出问题了，不能删除！");
+                    }
+                }
+            });
         });
     }
 

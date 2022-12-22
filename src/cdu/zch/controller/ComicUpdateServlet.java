@@ -3,6 +3,7 @@ package cdu.zch.controller;
 import cdu.zch.model.Comic;
 import cdu.zch.service.ComicService;
 import cdu.zch.service.impl.ComicServiceImpl;
+import com.google.gson.Gson;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -15,27 +16,44 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
+import java.io.PrintWriter;
+import java.util.*;
 
 @WebServlet("/comic/update")
 public class ComicUpdateServlet extends HttpServlet {
+
+    ComicService comicService = new ComicServiceImpl();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/json; charset=UTF-8");
+        PrintWriter out = resp.getWriter();
+
         String id = req.getParameter("id");
         HttpSession session = req.getSession();
         session.setAttribute("id", id);
-        ComicService comicService = new ComicServiceImpl();
         Comic comic = comicService.getComicById(Integer.parseInt(id));
         System.out.println("这里调用了要修改的" + comic);
-        req.setAttribute("comic", comic);
-        req.getRequestDispatcher("update.do").forward(req, resp);
+//        req.setAttribute("comic", comic);
+//        req.getRequestDispatcher("update.do").forward(req, resp);
+        Map<String, Object> map = new HashMap<>();
+        map.put("comic", comic);
+        String json = new Gson().toJson(map);
+//        System.out.println("#####" + json);
+        if(comic != null){
+            out.write(json);
+        }else{
+            out.write("false");
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("multipart/form-data; charset=UTF-8");
+        PrintWriter out = resp.getWriter();
+
         Comic comic = null;
         //保存位置
         String path = "/photo";
@@ -59,6 +77,9 @@ public class ComicUpdateServlet extends HttpServlet {
                 //判断是表单域还是上传的文件
                 if (item.isFormField()) {
                     //根据fieldName来判断是哪个表单控件
+                    if (item.getFieldName().equals("id")) {
+                        comic.setId(Integer.parseInt(new String(item.getString().getBytes("iso-8859-1"), "utf-8")));
+                    }
                     if (item.getFieldName().equals("comicName")) {
                         comic.setComicName(new String(item.getString().getBytes("iso-8859-1"), "utf-8"));
                     }
@@ -96,7 +117,7 @@ public class ComicUpdateServlet extends HttpServlet {
                     //获取上传文件文件名
                     String newName = UUID.randomUUID().toString();
                     String fileName = newName + item.getName();
-                    System.out.println(fileName);
+                    System.out.println("文件名：" + fileName);
                     File file = new File(savedDir + "//" + fileName);
                     item.write(file);
                     comic.setCover(req.getContextPath() + path + "/" + fileName);
@@ -105,16 +126,13 @@ public class ComicUpdateServlet extends HttpServlet {
         } catch (Exception e) {
             System.out.println("上传文件出错:" + e.getMessage());
         }
-        //向数据库中添加候选人
-        ComicService comicService = new ComicServiceImpl();
-        String id = (String) session.getAttribute("id");
-        System.out.println(id);
-        comic.setId(Integer.parseInt(id));
-        System.out.println(comic);
+//        System.out.println("@@@@@" + comic);
         if (comicService.updateComic(comic) != 0) {
-            System.out.println("成功了");
+//            System.out.println("成功了");
+            out.write("true");
         } else {
-            System.out.println("失败了");
+//            System.out.println("失败了");
+            out.write("false");
         }
     }
 }

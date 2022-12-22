@@ -12,9 +12,9 @@ public class ComicDaoImpl extends BaseDao implements ComicDao {
     @Override
     public int addComic(Comic comic) {
         int result;
-        String sql="insert into mydb.comic_table(comicName, nickname, cover, region, label, description, remark, year, updateTime, number, popularity,url) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql="insert into comic_table(comicName, nickname, cover, region, label, description, remark, year, updateTime, number, popularity,url) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
-            inster(comic, sql);
+            insert(comic, sql);
             result=pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println("上传失败");
@@ -23,7 +23,7 @@ public class ComicDaoImpl extends BaseDao implements ComicDao {
         return result;
     }
 
-    private void inster(Comic comic, String sql) throws SQLException {
+    private void insert(Comic comic, String sql) throws SQLException {
         pstmt=conn.prepareStatement(sql);
         pstmt.setString(1,comic.getComicName());
         pstmt.setString(2,comic.getNickname());
@@ -44,9 +44,9 @@ public class ComicDaoImpl extends BaseDao implements ComicDao {
         List<Comic> comicList= new ArrayList<>();
         String sql;
         if (region==0) {
-            sql = "SELECT * FROM mydb.comic_table ORDER BY id LIMIT ?,?";
+            sql = "SELECT * FROM comic_table ORDER BY id LIMIT ?,?";
         }else {
-            sql = "SELECT * FROM mydb.comic_table WHERE region=? ORDER BY id LIMIT ?,?";
+            sql = "SELECT * FROM comic_table WHERE region=? ORDER BY id LIMIT ?,?";
         }
             try {
                 if (region==0){
@@ -78,9 +78,9 @@ public class ComicDaoImpl extends BaseDao implements ComicDao {
         int bcount = 0;
         String sql;
         if (region==0){
-            sql = "SELECT count(*) FROM mydb.comic_table";
+            sql = "SELECT count(*) FROM comic_table";
         }else {
-            sql = "SELECT count(region)  FROM mydb.comic_table WHERE region=?";
+            sql = "SELECT count(region)  FROM comic_table WHERE region=?";
         }
         try {
             if (region==0){
@@ -103,7 +103,7 @@ public class ComicDaoImpl extends BaseDao implements ComicDao {
     @Override
     public List<Comic> getIndexComic() {
         List<Comic> comicList=new ArrayList<>();
-        String sql="SELECT * FROM mydb.comic_table order by number desc limit 5";
+        String sql="SELECT * FROM comic_table order by number desc limit 5";
         try {
             pstmt = conn.prepareStatement(sql);
             getComic(comicList);
@@ -127,7 +127,7 @@ public class ComicDaoImpl extends BaseDao implements ComicDao {
     @Override
     public Comic getComicById(int id) {
         Comic comic=new Comic();
-        String sql="SELECT * FROM mydb.comic_table WHERE id=?";
+        String sql="SELECT * FROM comic_table WHERE id=?";
         try {
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1,id);
@@ -156,9 +156,9 @@ public class ComicDaoImpl extends BaseDao implements ComicDao {
     @Override
     public int updateComic(Comic comic) {
        int result=0;
-       String sql="UPDATE mydb.comic_table SET comicName=?,nickname=?,cover=?,region=?,label=?,description=?,remark=?,year=?,updateTime=?,nickname=?,popularity=?,url=? WHERE id=?";
+       String sql="UPDATE comic_table SET comicName=?,nickname=?,cover=?,region=?,label=?,description=?,remark=?,year=?,updateTime=?,nickname=?,popularity=?,url=? WHERE id=?";
        try {
-           inster(comic, sql);
+           insert(comic, sql);
            pstmt.setInt(13,comic.getId());
            result=pstmt.executeUpdate();
        } catch (Exception e) {
@@ -170,7 +170,7 @@ public class ComicDaoImpl extends BaseDao implements ComicDao {
     @Override
     public int deleteComic(int id) {
        int result=0;
-        String sql="DELETE FROM mydb.comic_table WHERE id=?";
+        String sql="DELETE FROM comic_table WHERE id=?";
         try {
             pstmt=conn.prepareStatement(sql);
             pstmt.setInt(1,id);
@@ -184,7 +184,7 @@ public class ComicDaoImpl extends BaseDao implements ComicDao {
     @Override
     public List<Comic> searchComic(int first, int last,String comicName) {
         List<Comic> comicList=new ArrayList<>();
-        String sql = "SELECT * FROM mydb.comic_table WHERE comicName LIKE ? ORDER BY id LIMIT ?,?";
+        String sql = "SELECT * FROM comic_table WHERE comicName LIKE ? ORDER BY id LIMIT ?,?";
         try {
                 pstmt = conn.prepareStatement(sql);
                 pstmt.setString(1,"%"+comicName+"%");
@@ -200,7 +200,7 @@ public class ComicDaoImpl extends BaseDao implements ComicDao {
     @Override
     public int searchCount(String comicName) {
         int searchCount=0;
-        String sql="SELECT count(*)  FROM mydb.comic_table WHERE comicName LIKE ? ";
+        String sql="SELECT count(*)  FROM comic_table WHERE comicName LIKE ? ";
         try {
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,"%"+comicName+"%");

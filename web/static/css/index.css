@@ -53,6 +53,10 @@ a:visited{
     color: #ff9a9e;
     font-size: 50px !important;
 }
+.logo a span{
+    position: relative;
+    top: -10px;
+}
 
 /* 设置导航栏 */
 .nav-bar{
@@ -74,6 +78,9 @@ a:visited{
 }
 .navBar li:hover{
     background-image: linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%);
+}
+.navBar li a{
+    font-size: 20px;
 }
 
 /* 设置右侧工具栏 */
@@ -226,4 +233,270 @@ a:visited{
     color: #928E90;
     font-size: 14px;
     overflow: hidden;
+}
+/* 最新日本动漫 */
+.main-wrapper .latestriben{
+    width: 1200px;
+    height: 400px;
+    margin-bottom: 12px;
+}
+/* 最新日本动漫-标题 */
+.latestriben .title{
+    width: 1200px;
+    height: 50px;
+}
+/* 最新更新-图片列表 */
+.latestriben .list{
+    list-style: none;
+    width: 1200px;
+    height: 350px;
+    display: flex;
+    justify-content: space-around;
+}
+/* 设置图片容器 */
+.latestriben .list li .imgList{
+    width: 200px;
+    height: 300px;
+    padding: 0 10px;
+}
+/* 设置图片下方内容 */
+.latestriben .imgList img{
+    width: 180px;
+    height: 300px;
+}
+/* .latest .list li{
+    position: absolute;
+} */
+.latestriben .list li .remark{
+    position: relative;
+    left: 100px;
+    top: -18px;
+    color: aliceblue;
+    font-size: 14px;
+}
+.latestriben .list li .comicName{
+    position: relative;
+    left: 10px;
+    color: #a6c1ee;
+    font-size: 20px;
+}
+.latestriben .list li .description{
+    width: 220px;
+    height: 14px;
+    position: relative;
+    left: 10px;
+    color: #928E90;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+/* 最新国产动漫 */
+.main-wrapper .latestguo{
+    width: 1200px;
+    height: 400px;
+    margin-bottom: 12px;
+}
+/* 最新国产动漫-标题 */
+.latestguo .title{
+    width: 1200px;
+    height: 50px;
+}
+/* 最新更新-图片列表 */
+.latestguo .list{
+    list-style: none;
+    width: 1200px;
+    height: 350px;
+    display: flex;
+    justify-content: space-around;
+}
+/* 设置图片容器 */
+.latestguo .list li .imgList{
+    width: 200px;
+    height: 300px;
+    padding: 0 10px;
+}
+/* 设置图片下方内容 */
+.latestguo .imgList img{
+    width: 180px;
+    height: 300px;
+}
+/* .latest .list li{
+    position: absolute;
+} */
+.latestguo .list li .remark{
+    position: relative;
+    left: 100px;
+    top: -18px;
+    color: aliceblue;
+    font-size: 14px;
+}
+.latestguo .list li .comicName{
+    position: relative;
+    left: 10px;
+    color: #a6c1ee;
+    font-size: 20px;
+}
+.latestguo .list li .description{
+    width: 220px;
+    height: 14px;
+    position: relative;
+    left: 10px;
+    color: #928E90;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+/* 最新动漫电影 */
+.main-wrapper .latestdian{
+    width: 1200px;
+    height: 400px;
+    margin-bottom: 12px;
+}
+/* 最新动漫电影-标题 */
+.latestdian .title{
+    width: 1200px;
+    height: 50px;
+}
+/* 最新更新-图片列表 */
+.latestdian .list{
+    list-style: none;
+    width: 1200px;
+    height: 350px;
+    display: flex;
+    justify-content: space-around;
+}
+/* 设置图片容器 */
+.latestdian .list li .imgList{
+    width: 200px;
+    height: 300px;
+    padding: 0 10px;
+}
+/* 设置图片下方内容 */
+.latestdian .imgList img{
+    width: 180px;
+    height: 300px;
+}
+/* .latest .list li{
+    position: absolute;
+} */
+.latestdian .list li .remark{
+    position: relative;
+    left: 100px;
+    top: -18px;
+    color: aliceblue;
+    font-size: 14px;
+}
+.latestdian .list li .comicName{
+    position: relative;
+    left: 10px;
+    color: #a6c1ee;
+    font-size: 20px;
+}
+.latestdian .list li .description{
+    width: 220px;
+    height: 14px;
+    position: relative;
+    left: 10px;
+    color: #928E90;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+/* 欧美动漫 */
+.main-wrapper .oumeicomic{
+    width: 1200px;
+    height: 400px;
+    margin-bottom: 12px;
+}
+/* 欧美动漫-标题 */
+.oumeicomic .title{
+    width: 1200px;
+    height: 50px;
+}
+/* 最新更新-图片列表 */
+.oumeicomic .list{
+    list-style: none;
+    width: 1200px;
+    height: 350px;
+    display: flex;
+    justify-content: space-around;
+}
+/* 设置图片容器 */
+.oumeicomic .list li .imgList{
+    width: 200px;
+    height: 300px;
+    padding: 0 10px;
+}
+/* 设置图片下方内容 */
+.oumeicomic .imgList img{
+    width: 180px;
+    height: 300px;
+}
+/* .latest .list li{
+    position: absolute;
+} */
+.oumeicomic .list li .remark{
+    position: relative;
+    left: 100px;
+    top: -18px;
+    color: aliceblue;
+    font-size: 14px;
+}
+.oumeicomic .list li .comicName{
+    position: relative;
+    left: 10px;
+    color: #a6c1ee;
+    font-size: 20px;
+}
+.oumeicomic .list li .description{
+    width: 220px;
+    height: 14px;
+    position: relative;
+    left: 10px;
+    color: #928E90;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+/* 设置侧边悬浮栏 */
+.flyBar{
+    width: 50px;
+    height: 100px;
+    position: fixed;
+    top: 600px;
+    left: 1400px;
+}
+.flyBar a i{
+    font-size: 50px !important;
+    color: #fbc2eb;
+}
+
+/* 设置页脚 */
+.footer{
+    width: 800px;
+    height: 300px;
+    position: absolute;
+    top: 2600px;
+    left: 450px;
+}
+.furl{
+    width: 400px;
+    height: 30px;
+    list-style: none;
+    display: flex;
+    margin-top: 100px;
+    margin-bottom: 30px;
+    justify-content: space-between;
+}
+.furl li a{
+    color: #fbc2eb;
+    font-size: 22px;
+}
+.extrInfo{
+    margin-bottom: 30px;
+}
+.end{
+    position: relative;
+    left: 300px;
+    width: 300px;
 }

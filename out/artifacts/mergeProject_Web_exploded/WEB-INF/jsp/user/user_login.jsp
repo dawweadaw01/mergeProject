@@ -156,7 +156,7 @@
             let password = $("#loginForm #password").val();
             // console.log(username + " " + password);
             $.ajax({
-                url: "user/login",
+                url: "login",
                 type: "post",
                 //接收的数据
                 data: {

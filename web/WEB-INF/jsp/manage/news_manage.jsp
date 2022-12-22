@@ -64,7 +64,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <span class="iconfont icon-liebiao"></span>
-        用户列表&nbsp;&nbsp;&nbsp;
+        资讯列表&nbsp;&nbsp;&nbsp;
         <button id="btnAdd" class="btn btn-success"><span class="iconfont icon-xinjian"></span>新建</button>
     </div>
 
@@ -90,13 +90,13 @@
                     <td>${news.author}</td>
                     <td>${news.source}</td>
                     <td>${news.textContent}</td>
-                    <td>${news.imgCover}</td>
+                    <td><img src="${news.imgCover}" alt="封面" style="width: 45px; height: 45px;"></td>
                     <td>${news.creatTime}</td>
                     <td>
-                        <button class="btn btn-warning btnEdit"><span
+                        <button id="${news.id}" class="btn btn-warning btnEdit"><span
                                 class="iconfont icon-xiugai"></span>修改
                         </button>
-                        <button class="btn btn-danger btnDelete"><span
+                        <button id="${news.id}" class="btn btn-danger btnDelete"><span
                                 class="iconfont icon-shanchu"></span>删除
                         </button>
                     </td>
@@ -119,26 +119,36 @@
             </div>
             <div class="modal-body">
                 <div class="panel-body">
-                    <div class="form-group">
-                        <label for="username">用户名</label>
-                        <input type="text" class="form-control" id="username" placeholder="请输入用户名">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">密码</label>
-                        <input type="password" class="form-control" id="password" placeholder="请输入密码">
-                    </div>
-                    <div class="form-group">
-                        <label for="avatar">头像</label>
-                        <input type="file" id="avatar">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">邮箱</label>
-                        <input type="email" class="form-control" id="email" placeholder="请输入邮箱">
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">手机号</label>
-                        <input type="text" class="form-control" id="phone" placeholder="请输入邮箱">
-                    </div>
+                    <form action="" id="form">
+                        <div class="form-group">
+                            <label for="uid">编号</label>
+                            <input type="text" class="form-control" id="uid" name="id" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="title">标题</label>
+                            <input type="text" class="form-control" id="title" name="title" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="author">作者</label>
+                            <input type="text" class="form-control" id="author" name="author" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="source">来源</label>
+                            <input type="text" class="form-control" id="source" name="source" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="textContent">文章内容</label>
+                            <input type="text" class="form-control" id="textContent" name="textContent" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="imgCover">文章封面</label>
+                            <input type="file" id="imgCover" name="imgCover">
+                        </div>
+<%--                        <div class="form-group">--%>
+<%--                            <label for="createTime">创建时间</label>--%>
+<%--                            <input type="text" class="form-control" id="createTime" name="createTime" placeholder="">--%>
+<%--                        </div>--%>
+                    </form>
                 </div>
             </div>
             <div class="modal-footer">
@@ -204,9 +214,39 @@
             // 将模态框显示出来
             $("#myModal").modal("show");
             // 更改标题
-            $("#myModalLabel").text("新建用户");
+            $("#myModalLabel").text("新建资讯");
+
+            $("#uid").val("");
+            $('#title').val("");
+            $('#author').val("");
+            $('#source').val("");
+            $('#textContent').val("");
+            doAdd();
 
         });
+    }
+    // 添加
+    function doAdd(){
+        $('#btnSave').click(function () {
+            let formData = new FormData($('#form')[0]);
+            console.log(formData);
+            $.ajax({
+                // 这里和注册是一样的就直接用注册的接口了
+                url: '/news/add',
+                type: 'post',
+                data: formData,
+                contentType: false, // 提交给服务端的数据类型，不要当成字符串处理
+                processData: false, // 通过请求发送的数据是否转换为查询字符串
+                success: function (res) {
+                    if (res === "true") {
+                        location.reload();
+                    } else {
+                        alert("出现问题！请重新来过！");
+                        location.reload();
+                    }
+                }
+            });
+        })
     }
 
     // 点击修改
@@ -216,7 +256,52 @@
             $("#myModal").modal("show");
             // 更改标题,先清空内容再更改
             $("#myModalLabel").text("");
-            $("#myModalLabel").text("修改用户");
+            $("#myModalLabel").text("修改资讯");
+
+            // 获取对应的id
+            var id = $(this).attr('id');
+            $.ajax({
+                url: '/news/update',
+                type: 'get',
+                data: {
+                    id,
+                },
+                success: function (res) {
+                    if (res !== 'false') {
+                        // console.log(res);
+                        $('#uid').val(res.news.id);
+                        $('#title').val(res.news.title);
+                        $('#author').val(res.news.author);
+                        $('#source').val(res.news.source);
+                        $('#textContent').val(res.news.textContent);
+                    } else {
+                        alert("有问题！");
+                    }
+                }
+            });
+            doEdit();
+        });
+    }
+    // 修改
+    function doEdit(){
+        $('#btnSave').click(function () {
+            let formData = new FormData($('#form')[0]);
+            console.log(formData);
+            $.ajax({
+                url: '/news/update',
+                type: 'post',
+                data: formData,
+                contentType: false, // 提交给服务端的数据类型，不要当成字符串处理
+                processData: false, // 通过请求发送的数据是否转换为查询字符串
+                success: function (res) {
+                    // console.log(res);
+                    if (res === 'true') {
+                        location.reload();
+                    } else {
+                        alert('修改失败！请刷新来过');
+                    }
+                }
+            });
         });
     }
 
@@ -226,9 +311,31 @@
             //显示删除对话框
             $("#deleteModal").modal('show');
 
-            //获取当前行的id病赋给全局变量
-            // DELETE_ID = $(this).attr("uid");
+            var id = $(this).attr('id');
+            doDel(id);
         })
+    }
+    // 删除
+    function doDel(id){
+        $('#btnConfirmDelete').click(function () {
+            // console.log(id);
+            $.ajax({
+                url: '/news/delete',
+                type: 'get',
+                data: {
+                    id,
+                },
+                success: function (res) {
+                    console.log(res);
+                    if (res === "true") {
+                        alert("删除成功！");
+                        location.reload();
+                    } else {
+                        alert("好像出问题了，不能删除！");
+                    }
+                }
+            });
+        });
     }
 </script>
 </body>

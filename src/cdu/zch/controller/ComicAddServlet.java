@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
@@ -21,9 +22,13 @@ import java.util.UUID;
 @WebServlet("/comic/add")
 public class ComicAddServlet extends HttpServlet {
 
+    ComicService comicService = new ComicServiceImpl();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Comic comic = null;
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("multipart/form-data; charset=UTF-8");
         //保存位置
         String path = "/photo";
         //保存位置的真实物理地址
@@ -82,7 +87,7 @@ public class ComicAddServlet extends HttpServlet {
                     //获取上传文件文件名
                     String newName = UUID.randomUUID().toString();
                     String fileName = newName + item.getName();
-                    System.out.println(fileName);
+                    System.out.println("文件名3:" + fileName);
                     File file = new File(savedDir + "//" + fileName);
                     item.write(file);
                     comic.setCover(req.getContextPath() + path + "/" + fileName);
@@ -91,12 +96,13 @@ public class ComicAddServlet extends HttpServlet {
         } catch (Exception e) {
             System.out.println("上传文件出错:" + e.getMessage());
         }
-        //向数据库中添加候选人
-        ComicService comicService = new ComicServiceImpl();
-        if (comicService.addComic(comic) != 0) {
-            System.out.println("成功了");
+        PrintWriter out = resp.getWriter();
+        if (comicService.addComic(comic) == 1) {
+            out.write("true");
+//            System.out.println("成功了");
         } else {
-            System.out.println("失败了");
+            out.write("false");
+//            System.out.println("失败了");
         }
     }
 }

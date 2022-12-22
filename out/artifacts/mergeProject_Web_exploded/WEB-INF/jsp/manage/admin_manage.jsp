@@ -64,7 +64,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <span class="iconfont icon-liebiao"></span>
-        用户列表&nbsp;&nbsp;&nbsp;
+        管理员列表&nbsp;&nbsp;&nbsp;
         <button id="btnAdd" class="btn btn-success"><span class="iconfont icon-xinjian"></span>新建</button>
     </div>
 
@@ -114,12 +114,16 @@
             <div class="modal-body">
                 <div class="panel-body">
                     <div class="form-group">
-                        <label for="username">用户名</label>
-                        <input type="text" class="form-control" id="username" placeholder="请输入用户名">
+                        <label for="uid">编号</label>
+                        <input type="text" class="form-control" id="uid" name="id">
+                    </div>
+                    <div class="form-group">
+                        <label for="adminName">用户名</label>
+                        <input type="text" class="form-control" id="adminName" placeholder="请输入用户名" name="adminName">
                     </div>
                     <div class="form-group">
                         <label for="password">密码</label>
-                        <input type="password" class="form-control" id="password" placeholder="请输入密码">
+                        <input type="password" class="form-control" id="password" placeholder="请输入密码" name="password">
                     </div>
                 </div>
             </div>
@@ -176,9 +180,12 @@
 <script>
     $(function () {
 
-        addFunc();
-        editFunc();
-        deleteFunc();
+        window.onload = function (){
+            addFunc();
+            editFunc();
+            deleteFunc();
+        }
+
     })
 
     // 点击新建
@@ -187,10 +194,10 @@
             // 将模态框显示出来
             $("#myModal").modal("show");
             // 更改标题
-            $("#myModalLabel").text("新建用户");
+            $("#myModalLabel").text("新建管理员");
 
         });
-    };
+    }
 
     // 点击修改
     function editFunc() {
@@ -199,7 +206,7 @@
             $("#myModal").modal("show");
             // 更改标题,先清空内容再更改
             $("#myModalLabel").text("");
-            $("#myModalLabel").text("修改用户");
+            $("#myModalLabel").text("修改管理员");
         });
     }
 
@@ -208,10 +215,31 @@
         $("#btnDelete").click(function () {
             //显示删除对话框
             $("#deleteModal").modal('show');
-
-            //获取当前行的id病赋给全局变量
-            // DELETE_ID = $(this).attr("uid");
+            var id = $(this).attr('id');
+            doDel(id);
         })
+    }
+    // 做删除方法
+    function doDel(id) {
+        $('#btnConfirmDelete').click(function () {
+            // console.log(id);
+            $.ajax({
+                url: 'admin/delete',
+                type: 'get',
+                data: {
+                    id,
+                },
+                success: function (res) {
+                    console.log(res);
+                    if (res === "true") {
+                        alert("删除成功！");
+                        location.reload();
+                    } else {
+                        alert("好像出问题了，不能删除！");
+                    }
+                }
+            });
+        });
     }
 
 </script>

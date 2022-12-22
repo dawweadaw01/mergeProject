@@ -12,7 +12,7 @@
     <meta charset="utf-8"/>
     <title>首页</title>
     <!-- 引入CSS样式 -->
-    <link rel="stylesheet" href="static/css/reset.css">
+    <%--    <link rel="stylesheet" href="static/css/reset.css">--%>
     <link rel="stylesheet" href="static/css/index.css">
     <!-- 引入图标iconfont -->
     <link rel="stylesheet" href="static/font/iconfont.css">
@@ -30,7 +30,7 @@
             <div class="logo">
                 <a href="javascript:;">
                     <i class="iconfont icon-icon-test"></i>
-                    纯路人动漫
+                    <span>纯路人动漫</span>
                     <!-- <img src="./img/logo.png" alt="纯路人动漫"> -->
                 </a>
             </div>
@@ -38,22 +38,22 @@
             <div class="nav-bar">
                 <ul class="navBar">
                     <li>
-                        <a href="javascript:;">首页</a>
+                        <a href="index.do">首页</a>
                     </li>
                     <li>
-                        <a href="javascript:;">日本动漫</a>
+                        <a href="#">日本动漫</a>
                     </li>
                     <li>
-                        <a href="javascript:;">国产动漫</a>
+                        <a href="#">国产动漫</a>
                     </li>
                     <li>
-                        <a href="javascript:;">动漫电影</a>
+                        <a href="#">动漫电影</a>
                     </li>
                     <li>
-                        <a href="./comic_info.html">动漫资讯</a>
+                        <a href="comic_info.do">动漫资讯</a>
                     </li>
                     <li>
-                        <a href="javascript:;">欧美动漫</a>
+                        <a href="#">欧美动漫</a>
                     </li>
                     <li>
                         <a href="javascript:;">专题</a>
@@ -386,22 +386,502 @@
                 </ul>
             </div>
             <!-- 最新日本动漫 -->
-            <div class="latestriben"></div>
+            <div class="latestriben" id="latestriben">
+                <div class="title">
+                    <i class="iconfont icon-video"></i>
+                    <span>最新日本动漫</span>
+                </div>
+                <!-- 图片 -->
+                <ul class="list">
+                    <li>
+                        <!-- 封面列表 -->
+                        <div class="imgList">
+                            <a href="javascript:;">
+                                <img src="static/swiper_img/1.jpg" alt="">
+                            </a>
+                        </div>
+                        <!-- 设置图片下方内容 -->
+                        <!-- 备注（更新至第几集) -->
+                        <div class="remark">
+                            更新至1065话
+                        </div>
+                        <!-- 动漫名字 -->
+                        <div class="comicName">
+                            海贼王
+                        </div>
+                        <!-- 动漫简介 -->
+                        <div class="description">
+                            这是一部很好看的动漫
+                        </div>
+                    </li>
+                    <li>
+                        <!-- 封面列表 -->
+                        <div class="imgList">
+                            <a href="javascript:;">
+                                <img src="static/swiper_img/2.jpg" alt="">
+                            </a>
+                        </div>
+                        <!-- 设置图片下方内容 -->
+                        <!-- 备注（更新至第几集) -->
+                        <div class="remark">
+                            更新至1065话
+                        </div>
+                        <!-- 动漫名字 -->
+                        <div class="comicName">
+                            海贼王
+                        </div>
+                        <!-- 动漫简介 -->
+                        <div class="description">
+                            这是一部很好看的动漫
+                        </div>
+                    </li>
+                    <li>
+                        <!-- 封面列表 -->
+                        <div class="imgList">
+                            <a href="javascript:;">
+                                <img src="static/swiper_img/3.jpg" alt="">
+                            </a>
+                        </div>
+                        <!-- 设置图片下方内容 -->
+                        <!-- 备注（更新至第几集) -->
+                        <div class="remark">
+                            更新至1065话
+                        </div>
+                        <!-- 动漫名字 -->
+                        <div class="comicName">
+                            海贼王
+                        </div>
+                        <!-- 动漫简介 -->
+                        <div class="description">
+                            这是一部很好看的动漫
+                        </div>
+                    </li>
+                    <li>
+                        <!-- 封面列表 -->
+                        <div class="imgList">
+                            <a href="javascript:;">
+                                <img src="static/swiper_img/4.jpg" alt="">
+                            </a>
+                        </div>
+                        <!-- 设置图片下方内容 -->
+                        <!-- 备注（更新至第几集) -->
+                        <div class="remark">
+                            更新至1065话
+                        </div>
+                        <!-- 动漫名字 -->
+                        <div class="comicName">
+                            海贼王
+                        </div>
+                        <!-- 动漫简介 -->
+                        <div class="description">
+                            这是一部很好看的动漫
+                        </div>
+                    </li>
+                    <li>
+                        <!-- 封面列表 -->
+                        <div class="imgList">
+                            <a href="javascript:;">
+                                <img src="static/swiper_img/5.jpg" alt="">
+                            </a>
+                        </div>
+                        <!-- 设置图片下方内容 -->
+                        <!-- 备注（更新至第几集) -->
+                        <div class="remark">
+                            更新至1065话
+                        </div>
+                        <!-- 动漫名字 -->
+                        <div class="comicName">
+                            海贼王
+                        </div>
+                        <!-- 动漫简介 -->
+                        <div class="description">
+                            这是一部很好看的动漫
+                        </div>
+                    </li>
+                </ul>
+            </div>
             <!-- 最新国产动漫 -->
-            <div class="latestguo"></div>
+            <div class="latestguo" id="latestguo">
+                <div class="title">
+                    <i class="iconfont icon-video"></i>
+                    <span>最新国产动漫</span>
+                </div>
+                <!-- 图片 -->
+                <ul class="list">
+                    <li>
+                        <!-- 封面列表 -->
+                        <div class="imgList">
+                            <a href="javascript:;">
+                                <img src="static/swiper_img/1.jpg" alt="">
+                            </a>
+                        </div>
+                        <!-- 设置图片下方内容 -->
+                        <!-- 备注（更新至第几集) -->
+                        <div class="remark">
+                            更新至1065话
+                        </div>
+                        <!-- 动漫名字 -->
+                        <div class="comicName">
+                            海贼王
+                        </div>
+                        <!-- 动漫简介 -->
+                        <div class="description">
+                            这是一部很好看的动漫
+                        </div>
+                    </li>
+                    <li>
+                        <!-- 封面列表 -->
+                        <div class="imgList">
+                            <a href="javascript:;">
+                                <img src="static/swiper_img/2.jpg" alt="">
+                            </a>
+                        </div>
+                        <!-- 设置图片下方内容 -->
+                        <!-- 备注（更新至第几集) -->
+                        <div class="remark">
+                            更新至1065话
+                        </div>
+                        <!-- 动漫名字 -->
+                        <div class="comicName">
+                            海贼王
+                        </div>
+                        <!-- 动漫简介 -->
+                        <div class="description">
+                            这是一部很好看的动漫
+                        </div>
+                    </li>
+                    <li>
+                        <!-- 封面列表 -->
+                        <div class="imgList">
+                            <a href="javascript:;">
+                                <img src="static/swiper_img/3.jpg" alt="">
+                            </a>
+                        </div>
+                        <!-- 设置图片下方内容 -->
+                        <!-- 备注（更新至第几集) -->
+                        <div class="remark">
+                            更新至1065话
+                        </div>
+                        <!-- 动漫名字 -->
+                        <div class="comicName">
+                            海贼王
+                        </div>
+                        <!-- 动漫简介 -->
+                        <div class="description">
+                            这是一部很好看的动漫
+                        </div>
+                    </li>
+                    <li>
+                        <!-- 封面列表 -->
+                        <div class="imgList">
+                            <a href="javascript:;">
+                                <img src="static/swiper_img/4.jpg" alt="">
+                            </a>
+                        </div>
+                        <!-- 设置图片下方内容 -->
+                        <!-- 备注（更新至第几集) -->
+                        <div class="remark">
+                            更新至1065话
+                        </div>
+                        <!-- 动漫名字 -->
+                        <div class="comicName">
+                            海贼王
+                        </div>
+                        <!-- 动漫简介 -->
+                        <div class="description">
+                            这是一部很好看的动漫
+                        </div>
+                    </li>
+                    <li>
+                        <!-- 封面列表 -->
+                        <div class="imgList">
+                            <a href="javascript:;">
+                                <img src="static/swiper_img/5.jpg" alt="">
+                            </a>
+                        </div>
+                        <!-- 设置图片下方内容 -->
+                        <!-- 备注（更新至第几集) -->
+                        <div class="remark">
+                            更新至1065话
+                        </div>
+                        <!-- 动漫名字 -->
+                        <div class="comicName">
+                            海贼王
+                        </div>
+                        <!-- 动漫简介 -->
+                        <div class="description">
+                            这是一部很好看的动漫
+                        </div>
+                    </li>
+                </ul>
+            </div>
             <!-- 最新动漫电影 -->
-            <div class="latestdian"></div>
-            <!-- 榜单 -->
-            <div class="rankList"></div>
-            <!-- 最新动漫资讯 -->
-            <div class="latestzi"></div>
+            <div class="latestdian" id="latestdian">
+                <div class="title">
+                    <i class="iconfont icon-video"></i>
+                    <span>最新动漫电影</span>
+                </div>
+                <!-- 图片 -->
+                <ul class="list">
+                    <li>
+                        <!-- 封面列表 -->
+                        <div class="imgList">
+                            <a href="javascript:;">
+                                <img src="static/swiper_img/1.jpg" alt="">
+                            </a>
+                        </div>
+                        <!-- 设置图片下方内容 -->
+                        <!-- 备注（更新至第几集) -->
+                        <div class="remark">
+                            更新至1065话
+                        </div>
+                        <!-- 动漫名字 -->
+                        <div class="comicName">
+                            海贼王
+                        </div>
+                        <!-- 动漫简介 -->
+                        <div class="description">
+                            这是一部很好看的动漫
+                        </div>
+                    </li>
+                    <li>
+                        <!-- 封面列表 -->
+                        <div class="imgList">
+                            <a href="javascript:;">
+                                <img src="static/swiper_img/2.jpg" alt="">
+                            </a>
+                        </div>
+                        <!-- 设置图片下方内容 -->
+                        <!-- 备注（更新至第几集) -->
+                        <div class="remark">
+                            更新至1065话
+                        </div>
+                        <!-- 动漫名字 -->
+                        <div class="comicName">
+                            海贼王
+                        </div>
+                        <!-- 动漫简介 -->
+                        <div class="description">
+                            这是一部很好看的动漫
+                        </div>
+                    </li>
+                    <li>
+                        <!-- 封面列表 -->
+                        <div class="imgList">
+                            <a href="javascript:;">
+                                <img src="static/swiper_img/3.jpg" alt="">
+                            </a>
+                        </div>
+                        <!-- 设置图片下方内容 -->
+                        <!-- 备注（更新至第几集) -->
+                        <div class="remark">
+                            更新至1065话
+                        </div>
+                        <!-- 动漫名字 -->
+                        <div class="comicName">
+                            海贼王
+                        </div>
+                        <!-- 动漫简介 -->
+                        <div class="description">
+                            这是一部很好看的动漫
+                        </div>
+                    </li>
+                    <li>
+                        <!-- 封面列表 -->
+                        <div class="imgList">
+                            <a href="javascript:;">
+                                <img src="static/swiper_img/4.jpg" alt="">
+                            </a>
+                        </div>
+                        <!-- 设置图片下方内容 -->
+                        <!-- 备注（更新至第几集) -->
+                        <div class="remark">
+                            更新至1065话
+                        </div>
+                        <!-- 动漫名字 -->
+                        <div class="comicName">
+                            海贼王
+                        </div>
+                        <!-- 动漫简介 -->
+                        <div class="description">
+                            这是一部很好看的动漫
+                        </div>
+                    </li>
+                    <li>
+                        <!-- 封面列表 -->
+                        <div class="imgList">
+                            <a href="javascript:;">
+                                <img src="static/swiper_img/5.jpg" alt="">
+                            </a>
+                        </div>
+                        <!-- 设置图片下方内容 -->
+                        <!-- 备注（更新至第几集) -->
+                        <div class="remark">
+                            更新至1065话
+                        </div>
+                        <!-- 动漫名字 -->
+                        <div class="comicName">
+                            海贼王
+                        </div>
+                        <!-- 动漫简介 -->
+                        <div class="description">
+                            这是一部很好看的动漫
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- 欧美动漫 -->
+            <div class="oumeicomic" id="oumeicomic">
+                <div class="title">
+                    <i class="iconfont icon-video"></i>
+                    <span>欧美动漫</span>
+                </div>
+                <!-- 图片 -->
+                <ul class="list">
+                    <li>
+                        <!-- 封面列表 -->
+                        <div class="imgList">
+                            <a href="javascript:;">
+                                <img src="static/swiper_img/1.jpg" alt="">
+                            </a>
+                        </div>
+                        <!-- 设置图片下方内容 -->
+                        <!-- 备注（更新至第几集) -->
+                        <div class="remark">
+                            更新至1065话
+                        </div>
+                        <!-- 动漫名字 -->
+                        <div class="comicName">
+                            海贼王
+                        </div>
+                        <!-- 动漫简介 -->
+                        <div class="description">
+                            这是一部很好看的动漫
+                        </div>
+                    </li>
+                    <li>
+                        <!-- 封面列表 -->
+                        <div class="imgList">
+                            <a href="javascript:;">
+                                <img src="static/swiper_img/2.jpg" alt="">
+                            </a>
+                        </div>
+                        <!-- 设置图片下方内容 -->
+                        <!-- 备注（更新至第几集) -->
+                        <div class="remark">
+                            更新至1065话
+                        </div>
+                        <!-- 动漫名字 -->
+                        <div class="comicName">
+                            海贼王
+                        </div>
+                        <!-- 动漫简介 -->
+                        <div class="description">
+                            这是一部很好看的动漫
+                        </div>
+                    </li>
+                    <li>
+                        <!-- 封面列表 -->
+                        <div class="imgList">
+                            <a href="javascript:;">
+                                <img src="static/swiper_img/3.jpg" alt="">
+                            </a>
+                        </div>
+                        <!-- 设置图片下方内容 -->
+                        <!-- 备注（更新至第几集) -->
+                        <div class="remark">
+                            更新至1065话
+                        </div>
+                        <!-- 动漫名字 -->
+                        <div class="comicName">
+                            海贼王
+                        </div>
+                        <!-- 动漫简介 -->
+                        <div class="description">
+                            这是一部很好看的动漫
+                        </div>
+                    </li>
+                    <li>
+                        <!-- 封面列表 -->
+                        <div class="imgList">
+                            <a href="javascript:;">
+                                <img src="static/swiper_img/4.jpg" alt="">
+                            </a>
+                        </div>
+                        <!-- 设置图片下方内容 -->
+                        <!-- 备注（更新至第几集) -->
+                        <div class="remark">
+                            更新至1065话
+                        </div>
+                        <!-- 动漫名字 -->
+                        <div class="comicName">
+                            海贼王
+                        </div>
+                        <!-- 动漫简介 -->
+                        <div class="description">
+                            这是一部很好看的动漫
+                        </div>
+                    </li>
+                    <li>
+                        <!-- 封面列表 -->
+                        <div class="imgList">
+                            <a href="javascript:;">
+                                <img src="static/swiper_img/5.jpg" alt="">
+                            </a>
+                        </div>
+                        <!-- 设置图片下方内容 -->
+                        <!-- 备注（更新至第几集) -->
+                        <div class="remark">
+                            更新至1065话
+                        </div>
+                        <!-- 动漫名字 -->
+                        <div class="comicName">
+                            海贼王
+                        </div>
+                        <!-- 动漫简介 -->
+                        <div class="description">
+                            这是一部很好看的动漫
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 
 </div>
 
+<!-- 创建侧边悬浮栏 -->
+<div class="flyBar">
+    <a href="#">
+        <i class="iconfont icon-huojian"></i>
+    </a>
+</div>
+
+<!-- 创建页脚 -->
+<div class="footer">
+    <!-- 友情链接 -->
+    <ul class="furl">
+        <li><a href="https://www.bilibili.com">B站</a></li>
+        <li><a href="https://www.baidu.com">百度</a></li>
+        <li><a href="http://www.google.cn/">谷歌</a></li>
+        <li><a href="https://twitter.com">推特</a></li>
+        <li><a href="https://www.youtube.com">Youtube</a></li>
+    </ul>
+    <!-- 额外信息 -->
+    <div class="extrInfo">
+            <span>本站所有视频和图片均来自互联网收集而来，本网站只提供web页面服务，并不提供资源存储，也不参与录制、上传<br/>
+                若本站收录的节目无意侵犯了贵司版权，请发邮件至chunluren@qq.com （我们会在3个工作日内删除侵权内容，谢谢。）</span>
+    </div>
+    <!-- 收尾 -->
+    <div class="end">
+        <span>Copyright © 2022 纯路人动漫</span>
+    </div>
+</div>
+
 <!-- 以下是写swiper轮播图 -->
-<script src="./static/swiper/swiper-bundle.min.js"></script>
+<script src="static/swiper/swiper-bundle.min.js"></script>
+<script src="static/jquery-3.5.1/jquery-3.5.1.js"></script>
+<%--这个是轮播图的js--%>
 <script>
     var mySwiper = new Swiper('.swiper', {
         loop: true, // 循环模式选项
@@ -416,7 +896,28 @@
             fill: 'column',
             rows: 1,
         },
-    })
+    });
+
+    $(document).ready(function () {
+        //首先将#back-to-top隐藏
+        $(".flyBar").hide();
+        //当滚动条的位置处于距顶部400像素以下时，跳转链接出现，否则消失
+        $(function () {
+            $(window).scroll(function () {
+                if ($(window).scrollTop() > 400) {
+                    $(".flyBar").fadeIn(500);
+                } else {
+                    $(".flyBar").fadeOut(500);
+                }
+            });
+            //当点击跳转链接后，回到页面顶部位置
+            $(".flyBar").click(function () {
+                $('body,html').animate({ scrollTop: 0 }, 500);
+                return false;
+            });
+        });
+    });
 </script>
+
 </body>
 </html>

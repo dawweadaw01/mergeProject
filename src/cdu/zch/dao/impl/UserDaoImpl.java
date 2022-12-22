@@ -212,27 +212,31 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     @Override
     public int update(User user) {
         int rows = 0;
-        String sql = "UPDATE user_table SET userName=?,password=?,avatar=?,email=?,phone=?,createTime=?,collection=?,history=? WHERE id=?";
+        String sql = "UPDATE user_table SET userName=?,password=?,avatar=?,email=?,phone=? WHERE id=?";
+
         try {
             pstmt = conn.prepareStatement(sql);
+
             pstmt.setString(1, user.getUserName());
             pstmt.setString(2, user.getPassword());
             pstmt.setString(3, user.getAvatar());
             pstmt.setString(4, user.getEmail());
             pstmt.setString(5, user.getPhone());
-            pstmt.setLong(6, user.getCreateTime());
-            StringBuilder collection = new StringBuilder();
-            for (int i = 0; i < user.getCollection().length; i++) {
-                collection.append(user.getCollection()[i]);
-                collection.append("_");
-            }
-            pstmt.setString(7, collection.toString());
-            StringBuilder history = new StringBuilder();
-            for (int i = 0; i < user.getHistory().length; i++) {
-                history.append(user.getHistory()[i]);
-                history.append("_");
-            }
-            pstmt.setString(8, history.toString());
+//            pstmt.setLong(6, user.getCreateTime());
+//            StringBuilder collection = new StringBuilder();
+//            for (int i = 0; i < user.getCollection().length; i++) {
+//                collection.append(user.getCollection()[i]);
+//                collection.append("_");
+//            }
+//            pstmt.setString(7, collection.toString());
+//            StringBuilder history = new StringBuilder();
+//            for (int i = 0; i < user.getHistory().length; i++) {
+//                history.append(user.getHistory()[i]);
+//                history.append("_");
+//            }
+//            pstmt.setString(8, history.toString());
+            pstmt.setInt(6, user.getId());
+
             rows = pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println("DAO 更改用户失败");
@@ -339,7 +343,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     @Override
     public int countAdmin() {
         int count = 0;
-        String sql = "SELECT COUNT(*) FROM user_table";
+        String sql = "SELECT COUNT(*) FROM admin_table";
         try {
             pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();

@@ -13,9 +13,9 @@ public interface NewsService {
 
     News get(String sid);
     News get(int id);
-    boolean addNews(News news);
-    boolean updateNews(News news);
-    boolean updateNews(int id);
-    boolean del(int id);
-    boolean deleteNews(String sid);
+    Boolean addNews(News news);
+    Boolean updateNews(News news);
+    Boolean updateNews(int id);
+    Boolean del(int id);
+    Boolean deleteNews(String sid);
 }

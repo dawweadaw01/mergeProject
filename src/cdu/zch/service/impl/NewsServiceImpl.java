@@ -4,6 +4,7 @@ import cdu.zch.dao.NewsDao;
 import cdu.zch.dao.impl.NewsDaoImpl;
 import cdu.zch.model.News;
 import cdu.zch.service.NewsService;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.List;
 
@@ -40,28 +41,28 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public boolean addNews(News news) {
+    public Boolean addNews(News news) {
         return newsDao.addMsg(news)==1;
     }
 
     @Override
-    public boolean updateNews(News news) {
+    public Boolean updateNews(News news) {
         return newsDao.updateMsg(news)==1;
     }
 
     @Override
-    public boolean updateNews(int id) {
+    public Boolean updateNews(int id) {
         return newsDao.updateMsg(id)==1;
     }
 
     @Override
-    public boolean del(int id) {
+    public Boolean del(int id) {
         System.out.println("运行到service层");
         return newsDao.deleteMsg(id) == 1;
     }
 
     @Override
-    public boolean deleteNews(String sid) {
+    public Boolean deleteNews(String sid) {
         if(sid == null || sid.equals("")){
             return false;
         }

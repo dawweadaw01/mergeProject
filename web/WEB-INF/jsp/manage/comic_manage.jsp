@@ -64,7 +64,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <span class="iconfont icon-liebiao"></span>
-        用户列表&nbsp;&nbsp;&nbsp;
+        动漫列表&nbsp;&nbsp;&nbsp;
         <button id="btnAdd" class="btn btn-success"><span class="iconfont icon-xinjian"></span>新建</button>
     </div>
 
@@ -94,7 +94,7 @@
                     <th scope="row">${comic.id}</th>
                     <td>${comic.comicName}</td>
                     <td>${comic.nickname}</td>
-                    <td>${comic.cover}</td>
+                    <td><img src="${comic.cover}" alt="封面" style="height: 45px; width: 45px;"></td>
                     <td>${comic.region}</td>
                     <td>${comic.label}</td>
                     <td>${comic.description}</td>
@@ -105,10 +105,10 @@
                     <td>${comic.popularity}</td>
                     <td>${comic.url}</td>
                     <td>
-                        <button class="btn btn-warning btnEdit"><span
+                        <button id="${comic.id}" class="btn btn-warning btnEdit"><span
                                 class="iconfont icon-xiugai"></span>修改
                         </button>
-                        <button class="btn btn-danger btnDelete"><span
+                        <button id="${comic.id}" class="btn btn-danger btnDelete"><span
                                 class="iconfont icon-shanchu"></span>删除
                         </button>
                     </td>
@@ -132,7 +132,11 @@
             </div>
             <div class="modal-body">
                 <div class="panel-body">
-<%--                    <c:forEach items="${requestScope.comicList}" var="comic">--%>
+                    <form id="form">
+                        <div class="form-group">
+                            <label for="uid">编号</label>
+                            <input type="text" class="form-control" id="uid" name="id" readonly>
+                        </div>
                         <div class="form-group">
                             <label for="comicName">动漫名字</label>
                             <input type="text" class="form-control" id="comicName" placeholder="" name="comicName">
@@ -181,7 +185,8 @@
                             <label for="url">外部链接</label>
                             <input type="text" class="form-control" id="url" placeholder="" name="url">
                         </div>
-<%--                    </c:forEach>--%>
+                    </form>
+
                 </div>
             </div>
             <div class="modal-footer">
@@ -237,9 +242,12 @@
 <script>
     $(function () {
 
-        addFunc();
-        editFunc();
-        deleteFunc();
+        window.onload = function () {
+            addFunc();
+            editFunc();
+            deleteFunc();
+        }
+
     })
 
     // 点击新建
@@ -248,9 +256,46 @@
             // 将模态框显示出来
             $("#myModal").modal("show");
             // 更改标题
-            $("#myModalLabel").text("新建用户");
+            $("#myModalLabel").text("新建动漫");
+            $("#uid").val("");
+            $('#comicName').val("");
+            $('#nickname').val("");
+            $('#region').val("");
+            $('#label').val("");
+            $('#description').val("");
+            $('#remark').val("");
+            $('#year').val("");
+            $('#updateTime').val("");
+            $('#number').val("");
+            $('#popularity').val("");
+            $('#url').val("");
+            doAdd();
 
         });
+    }
+
+    // 添加
+    function doAdd() {
+        $('#btnSave').click(function () {
+            let formData = new FormData($('#form')[0]);
+            console.log(formData);
+            $.ajax({
+                // 这里和注册是一样的就直接用注册的接口了
+                url: '/comic/add',
+                type: 'post',
+                data: formData,
+                contentType: false, // 提交给服务端的数据类型，不要当成字符串处理
+                processData: false, // 通过请求发送的数据是否转换为查询字符串
+                success: function (res) {
+                    if (res === "true") {
+                        location.reload();
+                    } else {
+                        alert("出现问题！请重新来过！");
+                        location.reload();
+                    }
+                }
+            });
+        })
     }
 
     // 点击修改
@@ -260,7 +305,60 @@
             $("#myModal").modal("show");
             // 更改标题,先清空内容再更改
             $("#myModalLabel").text("");
-            $("#myModalLabel").text("修改用户");
+            $("#myModalLabel").text("修改动漫");
+
+            var id = $(this).attr('id');
+            $.ajax({
+                url: '/comic/update',
+                type: 'get',
+                data: {
+                    id,
+                },
+                success: function (res) {
+                    if (res !== 'false') {
+                        // console.log(res);
+                        $('#uid').val(res.comic.id);
+                        $('#comicName').val(res.comic.comicName);
+                        $('#nickname').val(res.comic.nickname);
+                        $('#region').val(res.comic.region);
+                        $('#label').val(res.comic.label);
+                        $('#description').val(res.comic.description);
+                        $('#remark').val(res.comic.remark);
+                        $('#year').val(res.comic.year);
+                        $('#updateTime').val(res.comic.updateTime);
+                        $('#number').val(res.comic.number);
+                        $('#popularity').val(res.comic.popularity);
+                        $('#url').val(res.comic.url);
+                    } else {
+                        alert("有问题！");
+                    }
+                }
+            });
+            doEdit();
+        });
+
+    }
+
+    // 修改
+    function doEdit() {
+        $('#btnSave').click(function () {
+            let formData = new FormData($('#form')[0]);
+            console.log(formData);
+            $.ajax({
+                url: '/comic/update',
+                type: 'post',
+                data: formData,
+                contentType: false, // 提交给服务端的数据类型，不要当成字符串处理
+                processData: false, // 通过请求发送的数据是否转换为查询字符串
+                success: function (res) {
+                    // console.log(res);
+                    if (res === 'true') {
+                        location.reload();
+                    } else {
+                        alert('修改失败！请刷新来过');
+                    }
+                }
+            });
         });
     }
 
@@ -269,10 +367,32 @@
         $(".btnDelete").click(function () {
             //显示删除对话框
             $("#deleteModal").modal('show');
-
-            //获取当前行的id病赋给全局变量
-            // DELETE_ID = $(this).attr("uid");
+            var id = $(this).attr('id');
+            doDel(id);
         })
+    }
+
+    // 删除
+    function doDel(id) {
+        $('#btnConfirmDelete').click(function () {
+            // console.log(id);
+            $.ajax({
+                url: '/comic/delete',
+                type: 'get',
+                data: {
+                    id,
+                },
+                success: function (res) {
+                    console.log(res);
+                    if (res === "true") {
+                        alert("删除成功！");
+                        location.reload();
+                    } else {
+                        alert("好像出问题了，不能删除！");
+                    }
+                }
+            });
+        });
     }
 </script>
 </body>

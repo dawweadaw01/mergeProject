@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/user/delete")
+@WebServlet("/delete")
 public class UserDeleteServlet extends HttpServlet {
 
     UserService userService = new UserServiceImpl();
@@ -23,7 +23,7 @@ public class UserDeleteServlet extends HttpServlet {
 
         String sid = req.getParameter("id");
 
-        System.out.println("sid:" + sid);
+//        System.out.println("sid:" + sid);
 //        if(sid==null || "".equals(sid)){
 //            resp.sendRedirect("list");
 //            return;
