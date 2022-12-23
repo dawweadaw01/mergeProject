@@ -50,7 +50,7 @@
                         <a href="#">动漫电影</a>
                     </li>
                     <li>
-                        <a href="comic_info.do">动漫资讯</a>
+                        <a href="news/news.do">动漫资讯</a>
                     </li>
                     <li>
                         <a href="#">欧美动漫</a>

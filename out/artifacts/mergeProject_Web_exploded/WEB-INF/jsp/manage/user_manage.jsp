@@ -95,8 +95,16 @@
                     <td>${user.email}</td>
                     <td>${user.phone}</td>
                     <td>${myfn:formatDate(user.createTime)}</td>
-                    <td>${user.collection}</td>
-                    <td>${user.history}</td>
+                    <td>
+                        <c:forEach items="${user.collection}" var="collection">
+                            ${collection} /
+                        </c:forEach>
+                    </td>
+                    <td>
+                        <c:forEach items="${user.history}" var="history">
+                            ${history} /
+                        </c:forEach>
+                    </td>
                     <td>
                         <button id="${user.id}" class="btn btn-warning btnEdit "><span
                                 class="iconfont icon-xiugai"></span>修改

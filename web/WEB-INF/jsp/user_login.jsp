@@ -34,10 +34,10 @@
         <!-- 输入框盒子 -->
         <form id="registerForm">
             <div class="input-box">
-                <input type="text" placeholder="用户名" name="username" id="username1">
-                <input type="email" placeholder="邮箱" name="email" id="email">
-                <input type="text" placeholder="手机号" name="phone" id="phone">
-                <input type="password" placeholder="密码" name="password" id="password1">
+                <input type="text" placeholder="用户名" name="username" id="username1" required><span id="msgName"></span>
+                <input type="password" placeholder="密码" name="password" id="password1" required><span id="msgPwd"></span>
+                <input type="text" placeholder="邮箱" name="email" id="email" required><span id="msgEmail"></span>
+                <input type="text" placeholder="手机号" name="phone" id="phone" required><span id="msgPhone"></span>
                 <input type="file" placeholder="头像" name="photo" id="photo">
             </div>
             <!-- 按钮盒子 -->
@@ -165,7 +165,7 @@
                 },
                 success: function (res) {
                     if (res !== "false") {
-                        window.location.href = "/user/test2.do";
+                        window.location.href = "user/user_self.do";
                     } else {
                         alert("登录失败！");
                         console.log(res);
@@ -180,24 +180,78 @@
     // 注册函数
     function registerFunc() {
         $('#register').click(function () {
-            // 得到form表单的数据
-            let formData = new FormData($('#registerForm')[0]);
-            $.ajax({
-                url: 'user/register',
-                type: 'post',
-                data: formData,
-                contentType: false, // 提交给服务端的数据类型，不要当成字符串处理
-                processData:false, // 通过请求发送的数据是否转换为查询字符串
-                success: function (res) {
-                    if (res === "true") {
-                        window.location.href = "user/user_login.do";
-                    } else {
-                        alert("出现问题！请重新来过！");
-                        location.reload();
+            // 注册之前需要校验
+            if(checkInput()){
+                // 得到form表单的数据
+                let formData = new FormData($('#registerForm')[0]);
+                $.ajax({
+                    url: 'register',
+                    type: 'post',
+                    data: formData,
+                    contentType: false, // 提交给服务端的数据类型，不要当成字符串处理
+                    processData:false, // 通过请求发送的数据是否转换为查询字符串
+                    success: function (res) {
+                        if (res === "true") {
+                            window.location.href = "user_login.do";
+                        } else {
+                            alert("出现问题！请重新来过！");
+                            location.reload();
+                        }
                     }
-                }
-            });
+                });
+            }
         });
+    }
+
+    // 校验注册
+    function checkInput(){
+        let username1 = $('#username1').val()
+        let password1 = $('#password1').val();
+        let email = $('#email').val();
+        let phone = $('#phone').val();
+        let a, b, c, d = 0;
+
+        // 用户名最长为3-12位字符串
+        let reg_username = /^\w{3,6}$/;
+        if(! reg_username.test(username1)){
+            $('#msgName').text('用户名需要3-6位字符！');
+        }else{
+            a = 1;
+            $('#msgName').text('');
+        }
+
+        // 密码最长为6-12位字符串
+        let reg_password = /^\w{6,12}$/;
+        if(! reg_password.test(password1)){
+            $('#msgPwd').text('密码需要6-12位字符！');
+        }else{
+            b = 1;
+            $('#msgPwd').text('');
+        }
+
+        // 邮箱的验证
+        let reg_email = /^[a-zA-Z0-9]+([-_.][A-Za-zd]+)*@([a-zA-Z0-9]+[-.])+[A-Za-zd]{2,5}$/;
+        if(! reg_email.test(email)){
+            $('#msgEmail').text('邮箱格式错误！')
+        }else{
+            c = 1;
+            $('#msgEmail').text('');
+        }
+
+        // 手机号验证
+        let reg_phone =  /^1[3456789]{1}\d{9}$/;
+        if(! reg_phone.test(phone)){
+            $('#msgPhone').text('手机号格式错误!');
+        }else{
+            d = 1;
+            $('#msgPhone').text('');
+        }
+        if (a === 1 && b === 1 && c === 1 && d === 1){
+            console.log(a,b,c,d);
+            return 1;
+        }else{
+            return 0;
+        }
     }
 </script>
 <script>

@@ -19,11 +19,11 @@
     </div>
     <div class="content">
         <button>
-            <a href="./admin/admin_login.jsp">管理员登陆（内部人员）</a>
+            <a href="admin_login.do">管理员登陆（内部人员）</a>
         </button>
         <br><br>
         <button>
-            <a href="./user/user_login.jsp">普通用户登陆注册</a>
+            <a href="user_login.do">普通用户登陆注册</a>
         </button>
     </div>
 </div>

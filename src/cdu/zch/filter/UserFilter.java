@@ -26,7 +26,7 @@ public class UserFilter implements Filter {
         if (user != null) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
-            req.getRequestDispatcher(req.getContextPath() + "/user/user_login.do").forward(req, resp);
+            req.getRequestDispatcher(req.getContextPath() + "user_login.do").forward(req, resp);
         }
     }
 }

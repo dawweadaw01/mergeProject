@@ -1,0 +1,127 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+/* 设置外层大容器 */
+.all-wrapper{
+    width: 1200px;
+    height: 800px;
+    background-color: #E8EAED;
+    margin: 100px auto;
+    display: flex;
+}
+/* 去除所有a的下划线 */
+a{
+    text-decoration: none;
+}
+
+/* 设置左侧导航栏 */
+.left-nav{
+    width: 150px;
+    height: 800px;
+    background-color: #F1F3F4;
+}
+/* 设置头像 */
+.avatar{
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    margin-top: 50px;
+    /* background-color: tomato; */
+}
+.avatar img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+/* 设置用户名 */
+.user_name{
+    width: 150px;
+    height: 50px;
+    margin-top: 10px;
+    text-align: center;
+    background-color: #E8EAED;
+}
+.user_name span{
+    line-height: 50px;
+    color: blueviolet;
+}
+
+/* 设置头像下方导航栏 */
+.list-nav{
+    list-style: none;
+    margin-top: 100px;
+}
+.list-nav li{
+    display: block;
+    width: 150px;
+    height: 50px;
+    background-color: #F1F3F4;
+    margin-top: 10px;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+}
+.list-nav li:hover{
+    background-color: #E8EAED;
+}
+.list-nav li a{
+    color: #663377;
+}
+
+/* 设置右侧内容区 */
+.right-nav{
+    width: 1050px;
+    height: 800px;
+}
+/* 收藏 */
+.big,
+.big .content{
+    width: 1050px;
+    height: 800px;
+}
+/* 最新更新-图片列表 */
+.content .list{
+    list-style: none;
+    width: 1050px;
+    height: 400px;
+    display: flex;
+    justify-content: space-around;
+}
+/* 设置图片容器 */
+.content .list li .imgList{
+    width: 200px;
+    height: 300px;
+    padding: 0 10px;
+}
+/* 设置图片下方内容 */
+.content .imgList img{
+    width: 180px;
+    height: 300px;
+}
+/* .latest .list li{
+    position: absolute;
+} */
+.list li .remark{
+    position: relative;
+    left: 100px;
+    top: -18px;
+    color: aliceblue;
+    font-size: 14px;
+}
+.list li .comicName{
+    position: relative;
+    left: 10px;
+    color: #a6c1ee;
+    font-size: 20px;
+}
+.list li .description{
+    width: 220px;
+    height: 14px;
+    position: relative;
+    left: 10px;
+    color: #928E90;
+    font-size: 14px;
+    overflow: hidden;
+}

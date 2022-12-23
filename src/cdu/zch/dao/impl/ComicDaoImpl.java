@@ -156,7 +156,7 @@ public class ComicDaoImpl extends BaseDao implements ComicDao {
     @Override
     public int updateComic(Comic comic) {
        int result=0;
-       String sql="UPDATE comic_table SET comicName=?,nickname=?,cover=?,region=?,label=?,description=?,remark=?,year=?,updateTime=?,nickname=?,popularity=?,url=? WHERE id=?";
+       String sql="UPDATE comic_table SET comicName=?,nickname=?,cover=?,region=?,label=?,description=?,remark=?,year=?,updateTime=?,number=?,popularity=?,url=? WHERE id=?";
        try {
            insert(comic, sql);
            pstmt.setInt(13,comic.getId());

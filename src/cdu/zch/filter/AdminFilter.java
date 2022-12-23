@@ -25,7 +25,7 @@ public class AdminFilter implements Filter {
         if (admin != null) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
-            req.getRequestDispatcher(req.getContextPath() + "/admin/admin_login.do").forward(req,resp);
+            req.getRequestDispatcher(req.getContextPath() + "admin_login.do").forward(req,resp);
         }
     }
 }
