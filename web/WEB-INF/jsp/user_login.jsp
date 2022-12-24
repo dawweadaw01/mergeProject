@@ -165,7 +165,7 @@
                 },
                 success: function (res) {
                     if (res !== "false") {
-                        window.location.href = "user/user_self.do";
+                        window.location.href = "index.do";
                     } else {
                         alert("登录失败！");
                         console.log(res);

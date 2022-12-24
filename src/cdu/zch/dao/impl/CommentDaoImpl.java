@@ -11,7 +11,7 @@ public class CommentDaoImpl extends BaseDao implements CommentDao {
     @Override
     public List<Comment> getComment(int comicId) {
         List<Comment> commentList=new ArrayList<>();
-        String sql="SELECT * FROM mydb.comment where comicId=? order by time desc ";
+        String sql="SELECT * FROM comment where comicId=? order by time desc ";
         try {
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1,comicId);
@@ -34,7 +34,7 @@ public class CommentDaoImpl extends BaseDao implements CommentDao {
     @Override
     public int addComment(Comment comment) {
         int result=0;
-        String sql="insert into mydb.comment(comicId, userId, otherId, comment, time) VALUES (?,?,?,?,?)";
+        String sql="insert into comment(comicId, userId, otherId, comment, time) VALUES (?,?,?,?,?)";
         try {
             pstmt=conn.prepareStatement(sql);
             pstmt.setInt(1,comment.getComicId());
@@ -52,7 +52,7 @@ public class CommentDaoImpl extends BaseDao implements CommentDao {
     @Override
     public int deleteComment(int id) {
         int result=0;
-        String sql="DELETE FROM mydb.comment WHERE id=?";
+        String sql="DELETE FROM comment WHERE id=?";
         try {
             pstmt=conn.prepareStatement(sql);
             pstmt.setInt(1,id);

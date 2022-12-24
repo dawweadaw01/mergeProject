@@ -16,7 +16,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet("/comic/detail")
 public class ComicDetailServlet extends HttpServlet {
@@ -36,8 +39,10 @@ public class ComicDetailServlet extends HttpServlet {
                 list.setReviewer(userService.selectByUserId(list.getUserId()));
                 list.setReviewerTo(userService.selectByUserId(list.getOtherId()));
         }
-        ComicAndComment comicAndComment=new ComicAndComment(comic,commentList);
-        req.setAttribute("detailList",comicAndComment);
-        req.getRequestDispatcher("detail.do").forward(req,resp);
+//        ComicAndComment comicAndComment = new ComicAndComment(comic,commentList);
+//        req.setAttribute("detailList",comicAndComment);
+        req.setAttribute("comic", comic);
+        req.setAttribute("commentList", commentList);
+        req.getRequestDispatcher("/comic/comic_info.do").forward(req,resp);
     }
 }

@@ -74,3 +74,32 @@ swiper-wrapper{
     width: 560px;
     height: 140px;
 }
+/* 设置左侧 */
+li .left-info{
+    width: 415px;
+    height: 140px;
+}
+/* 设置标题 */
+.info-title{
+    height: 50px;
+    width: 415px;
+}
+/* 设置内容 */
+.info-desc{
+    height: 50px;
+    width: 415px;
+}
+.info-etc{
+    height: 40px;
+    width: 415px;
+}
+
+/* 设置右侧 */
+li .right-info{
+    width: 145px;
+    height: 145px;
+}
+.right-info a img{
+    width: 145px;
+    height: 145px;
+}

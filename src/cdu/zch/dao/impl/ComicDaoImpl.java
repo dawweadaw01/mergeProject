@@ -126,13 +126,14 @@ public class ComicDaoImpl extends BaseDao implements ComicDao {
 
     @Override
     public Comic getComicById(int id) {
-        Comic comic=new Comic();
+        Comic comic=null;
         String sql="SELECT * FROM comic_table WHERE id=?";
         try {
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1,id);
             rs = pstmt.executeQuery();
             while (rs.next()){
+                comic = new Comic();
                 comic.setId(id);
                 comic.setComicName(rs.getString("comicName"));
                 comic.setNickname(rs.getString("nickname"));

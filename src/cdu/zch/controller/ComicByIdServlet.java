@@ -28,6 +28,7 @@ public class ComicByIdServlet extends HttpServlet {
         Comic comic = comicService.getComicById(Integer.parseInt(id));
 
         String json = new Gson().toJson(comic);
+//        System.out.println(json);
         if(json != null){
             out.write(json);
         }else{

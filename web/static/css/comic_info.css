@@ -193,7 +193,7 @@ textarea{
     position: relative;
     top: -120px;
     left: 400px;
-    width: 35px;
+    width: 45px;
 }
 
 /* 设置榜单容器 */
@@ -216,7 +216,7 @@ textarea{
 .right .sort{
     list-style: none;
 }
-.sort li a{
+.sort li button{
     text-decoration: none;
     color: #999999;
     font-size: 20px;

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <base href="http://${header.host}${pageContext.request.contextPath}/"/>
@@ -68,9 +69,16 @@
                     </a>
                 </div>
                 <div class="admin">
-                    <a href="login_choice.do">
-                        <i class="iconfont icon-my-admin"></i>
-                    </a>
+                    <c:if test="${empty user}">
+                        <a href="login_choice.do">
+                            <i class="iconfont icon-my-admin"></i>
+                        </a>
+                    </c:if>
+                    <c:if test="${not empty user}">
+                        <a href="user/user_self.do">
+                            <i class="iconfont icon-my-admin"></i>
+                        </a>
+                    </c:if>
                 </div>
             </div>
         </div>
@@ -141,7 +149,7 @@
                     </div>
                 </div>
                 <div class="swiper-slide">
-                    <a href="javascript:;">
+                    <a href="comic/detail?id=12">
                         <img src="static/swiper_img/4.jpg" alt="">
                     </a>
                     <!-- 设置图片下方内容 -->

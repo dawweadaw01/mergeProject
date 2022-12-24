@@ -106,11 +106,11 @@
                         </c:forEach>
                     </td>
                     <td>
-                        <button id="${user.id}" class="btn btn-warning btnEdit "><span
-                                class="iconfont icon-xiugai"></span>修改
+                        <button id="${user.id}" class="btn btn-warning btnEdit ">
+                            <span class="iconfont icon-xiugai"></span>修改
                         </button>
-                        <button id="${user.id}" class="btn btn-danger btnDelete"><span
-                                class="iconfont icon-shanchu"></span>删除
+                        <button id="${user.id}" class="btn btn-danger btnDelete">
+                            <span class="iconfont icon-shanchu"></span>删除
                         </button>
                     </td>
                 </tr>
@@ -223,53 +223,6 @@
             deleteFunc();
         }
     })
-
-    // 初始化渲染页面
-    // function init() {
-    //     $.ajax({
-    //         url: 'manage/user',
-    //         type: 'get',
-    //         data: {},
-    //         success: function (res) {
-    //             // console.log(res);
-    //             var tr;
-    //             var th;
-    //             var td;
-    //             $.each(res.userList, function (index, value) {
-    //                 tr = $('<tr></tr>');
-    //                 th = $('<th scope="row">' + value.id + '</th>');
-    //                 tr.append(th);
-    //                 td = $('<td>' + value.userName + '</td>');
-    //                 tr.append(td);
-    //                 td = $('<td>' + value.password + '</td>');
-    //                 tr.append(td);
-    //                 td = $('<td><img src=' + value.avatar + '  alt="头像" style="width: 45px; height: 45px;"></td>');
-    //                 tr.append(td);
-    //                 td = $('<td>' + value.email + '</td>');
-    //                 tr.append(td);
-    //                 td = $('<td>' + value.phone + '</td>');
-    //                 tr.append(td);
-    //                 td = $('<td>' + value.createTime + '</td>');
-    //                 tr.append(td);
-    //                 td = $('<td>' + value.history + '</td>');
-    //                 tr.append(td);
-    //                 td = $('<td>' + value.collection + '</td>');
-    //                 tr.append(td);
-    //                 td = $('<td><button id=' + value.id + ' class="btn btn-warning btnEdit">' +
-    //                     '<span class="iconfont icon-xiugai"></span>修改</button>' +
-    //                     '<button id=' + value.id + ' class="btn btn-danger btnDelete">' +
-    //                     '<span class="iconfont icon-shanchu"></span>删除</button>' +
-    //                     '</td>');
-    //                 tr.append(td);
-    //                 $('tbody').append(tr);
-    //             });
-    //             var li1 = $('<li><a href=manage/user?currentPage=1>首页</a></li>');
-    //             var li2 = $('<li><a href=manage/user?currentPage=' + res.pageInfo.pageNum +' >末页</a></li>');
-    //             $('.pagination').append(li1);
-    //             $('.pagination').append(li2);
-    //         }
-    //     });
-    // }
 
     // 点击新建
     function addFunc() {
