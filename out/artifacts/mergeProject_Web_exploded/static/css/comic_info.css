@@ -41,7 +41,7 @@
 .comicName,
 .score,
 .nickname,
-.label,
+.label1,
 .region,
 .year,
 .updateTime,
@@ -54,7 +54,7 @@
 /* 设置评分等标题*/
 .score span:nth-child(1),
 .nickname span:nth-child(1),
-.label span:nth-child(1),
+.label1 span:nth-child(1),
 .region span:nth-child(1),
 .year span:nth-child(1),
 .updateTime span:nth-child(1),
@@ -70,7 +70,7 @@
 .download{
     position: relative;
     left: 100px;
-    top: -4px;
+    top: -14px;
 }
 
 /* 设置下方容器 */
@@ -104,9 +104,6 @@ textarea{
     position: relative;
     left: 430px;
 }
-#send{
-    background-color: aquamarine;
-}
 /* 设置用户评论 */
 .left .user{
     width: 500px;
@@ -121,18 +118,6 @@ textarea{
 .user .userTitle span{
     line-height: 30px;
 }
-/* 设置评论总数 */
-.user .total{
-    width: 250px;
-    height: 30px;
-    background-color: aliceblue;
-    position: relative;
-    top: -50px;
-    left: 250px;
-}
-.user .total span{
-    line-height: 30px;
-}
 /* 设置评论列表 */
 .user .userComment{
     list-style: none;
@@ -143,7 +128,7 @@ textarea{
 .userComment .comment{
     width: 450px;
     height: 120px;
-    background-color: aquamarine;
+    background-color: aliceblue;
 }
 /* 设置头像 */
 .comment .avatar{
@@ -163,7 +148,7 @@ textarea{
     left: 100px;
     width: 100px;
     height: 30px;
-    background-color: bisque;
+    /*background-color: bisque;*/
 }
 .comment .userName span{
     color: black;
@@ -176,7 +161,7 @@ textarea{
     left: 290px;
     width: 160px;
     height: 30px;
-    background-color: bisque;
+    /*background-color: bisque;*/
 }
 .comment .Ctime span{
     color: #999999;
@@ -195,11 +180,91 @@ textarea{
     left: 400px;
     width: 45px;
 }
+/*设置删除*/
+.comment .del{
+    position: relative;
+    top: -190px;
+    left: 400px;
+    width: 45px;
+}
+
+/* 设置回复人 */
+.userComment .comment2{
+    width: 370px;
+    height: 100px;
+    background-color: aliceblue;
+    position: relative;
+    left: 80px;
+}
+/* 设置头像 */
+.comment2 .avatar{
+    width: 80px;
+    height: 100px;
+    border-radius: 50%;
+}
+.avatar img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+/* 设置名字 */
+.comment2 .userName{
+    position: relative;
+    top: -100px;
+    left: 100px;
+    width: 100px;
+    height: 30px;
+    /* background-color: bisque; */
+}
+.comment2 .userName span{
+    color: black;
+    font-weight: bold;
+}
+/* 设置时间 */
+.comment2 .Ctime{
+    position: relative;
+    top: -130px;
+    left: 200px;
+    width: 160px;
+    height: 30px;
+    /* background-color: bisque; */
+}
+.comment2 .Ctime span{
+    color: #999999;
+}
+/* 设置内容 */
+.comment2 .Ctxt{
+    position: relative;
+    top: -120px;
+    left: 100px;
+    width: 350px;
+}
+/* 设置回复人 */
+.comment2 .replyTo{
+    position: relative;
+    top: -110px;
+    left: 100px;
+    width: 150px;
+}
+/* 设置回复 */
+.comment2 .reply{
+    position: relative;
+    top: -130px;
+    left: 320px;
+    width: 35px;
+}
+/*设置删除*/
+.comment2 .del{
+    position: relative;
+    top: -200px;
+    left: 320px;
+    width: 45px;
+}
 
 /* 设置榜单容器 */
 .right{
     position: absolute;
-    width: 200px;
+    width: 500px;
     left: 700px;
 }
 /* 设置榜单标题 */
@@ -216,7 +281,11 @@ textarea{
 .right .sort{
     list-style: none;
 }
-.sort li button{
+.sort li{
+    height: 30px;
+    margin-bottom: 20px;
+}
+.sort li a{
     text-decoration: none;
     color: #999999;
     font-size: 20px;

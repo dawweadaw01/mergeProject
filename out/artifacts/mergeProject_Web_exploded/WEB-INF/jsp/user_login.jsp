@@ -168,7 +168,7 @@
                         window.location.href = "index.do";
                     } else {
                         alert("登录失败！");
-                        console.log(res);
+                        // console.log(res);
                         // 刷新页面
                         location.reload();
                     }

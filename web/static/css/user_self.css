@@ -85,9 +85,9 @@ a{
 .content .list{
     list-style: none;
     width: 1050px;
-    height: 400px;
+    /*height: 400px;*/
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
 }
 /* 设置图片容器 */
 .content .list li .imgList{

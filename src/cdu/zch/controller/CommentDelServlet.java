@@ -9,16 +9,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+
 @WebServlet("/comic/delComment")
 public class CommentDelServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-         String id=req.getParameter("id");
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        PrintWriter out = resp.getWriter();
+        String id=req.getParameter("id");
         CommentService commentService=new CommentServiceImpl();
         if (commentService.deleteComment(Integer.parseInt(id))==1){
-            resp.sendRedirect("list");
+            out.write("true");
+//            resp.sendRedirect("list");
         }else {
-            System.out.println("没删除");
+            out.write("false");
+//            System.out.println("没删除");
         }
     }
 

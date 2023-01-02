@@ -10,7 +10,7 @@ public class BaseDao {
     //注意url需要手动设置时区
     String url = "jdbc:mysql://localhost:3306/javawebProject?setServerTimeZone";  //serverTimezone=Asia/Shanghai
     String dbUserName = "root";
-    String dbPwd = "248613";
+    String dbPwd = "123456";
 
     protected Connection conn = null;
 

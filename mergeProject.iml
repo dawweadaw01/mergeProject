@@ -23,7 +23,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="Tomcat 9.0.45" level="application_server_libraries" />
     <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Tomcat 9.0.65" level="application_server_libraries" />
   </component>
 </module>

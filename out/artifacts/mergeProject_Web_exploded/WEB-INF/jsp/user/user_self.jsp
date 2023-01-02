@@ -31,10 +31,10 @@
         </div>
         <!-- 下方导航栏 -->
         <ul class="list-nav">
-            <li class="">
+            <li class="" id="sc">
                 <a href="javascript:;">收藏动漫</a>
             </li>
-            <li class="">
+            <li class="" id="ls">
                 <a href="javascript:;">历史观看</a>
             </li>
             <li class="">
@@ -296,70 +296,76 @@
     });
 
     // 循环渲染 “收藏”
-    <c:if test="${not empty user.collection}">
-    <c:forEach items="${user.collection}" var="collection">
-    $.ajax({
-        url: '/comic/findById',
-        type: 'get',
-        data: {
-            'id': ${collection},
-        },
-        dataType: 'json', // 当作json而不是字符串处理
-        success: function (res){
-            // console.log(res);
-            // console.log(typeof res);
-            // 下面的操作是为了生成相应的html渲染进页面
-            let li = $('<li></li>');
-            let div1 = $('<div class="imgList"></div>');
-            let a = $('<a href="javascript:;"></a>');
-            let img = $('<img src=' + res.cover + ' alt="">');
-            let div2 = $('<div class="remark">' + res.remark + '</div>');
-            let div3 = $('<div class="comicName">' + res.comicName + '</div>');
-            let div4 = $('<div class="description">' + res.description + '</div>');
-            a.append(img);
-            div1.append(a);
-            li.append(div1);
-            li.append(div2);
-            li.append(div3);
-            li.append(div4);
-            $('ul#shoucang').append(li);
-        }
+    $('#sc').click(function (){
+        $('#lishi').empty();
+        <c:if test="${not empty user.collection}">
+        <c:forEach items="${user.collection}" var="collection">
+        $.ajax({
+            url: '/comic/findById',
+            type: 'get',
+            data: {
+                'id': ${collection},
+            },
+            dataType: 'json', // 当作json而不是字符串处理
+            success: function (res) {
+                // console.log(res);
+                // console.log(typeof res);
+                // 下面的操作是为了生成相应的html渲染进页面
+                let li = $('<li></li>');
+                let div1 = $('<div class="imgList"></div>');
+                let a = $('<a href="javascript:;"></a>');
+                let img = $('<img src=' + res.cover + ' alt="">');
+                let div2 = $('<div class="remark">' + res.remark + '</div>');
+                let div3 = $('<div class="comicName">' + res.comicName + '</div>');
+                let div4 = $('<div class="description">' + res.description + '</div>');
+                a.append(img);
+                div1.append(a);
+                li.append(div1);
+                li.append(div2);
+                li.append(div3);
+                li.append(div4);
+                $('ul#shoucang').append(li);
+            }
+        });
+        </c:forEach>
+        </c:if>
     });
-    </c:forEach>
-    </c:if>
 
     // 循环渲染 “历史”
-    <c:if test="${not empty user.history}">
-    <c:forEach items="${user.history}" var="history">
-    $.ajax({
-        url: '/comic/findById',
-        type: 'get',
-        data: {
-            'id': ${history},
-        },
-        dataType: 'json', // 当作json而不是字符串处理
-        success: function (res) {
-            // console.log(res);
-            // console.log(typeof res);
-            // 下面的操作是为了生成相应的html渲染进页面
-            let li = $('<li></li>');
-            let div1 = $('<div class="imgList"></div>');
-            let a = $('<a href="javascript:;"></a>');
-            let img = $('<img src=' + res.cover + ' alt="">');
-            let div2 = $('<div class="remark">' + res.remark + '</div>');
-            let div3 = $('<div class="comicName">' + res.comicName + '</div>');
-            let div4 = $('<div class="description">' + res.description + '</div>');
-            a.append(img);
-            div1.append(a);
-            li.append(div1);
-            li.append(div2);
-            li.append(div3);
-            li.append(div4);
-            $('ul#lishi').append(li);
-        }
+    $('#ls').click(function (){
+        $('#shoucang').empty();
+        <c:if test="${not empty user.history}">
+        <c:forEach items="${user.history}" var="history">
+        $.ajax({
+            url: '/comic/findById',
+            type: 'get',
+            data: {
+                'id': ${history},
+            },
+            dataType: 'json', // 当作json而不是字符串处理
+            success: function (res) {
+                // console.log(res);
+                // console.log(typeof res);
+                // 下面的操作是为了生成相应的html渲染进页面
+                let li = $('<li></li>');
+                let div1 = $('<div class="imgList"></div>');
+                let a = $('<a href="javascript:;"></a>');
+                let img = $('<img src=' + res.cover + ' alt="">');
+                let div2 = $('<div class="remark">' + res.remark + '</div>');
+                let div3 = $('<div class="comicName">' + res.comicName + '</div>');
+                let div4 = $('<div class="description">' + res.description + '</div>');
+                a.append(img);
+                div1.append(a);
+                li.append(div1);
+                li.append(div2);
+                li.append(div3);
+                li.append(div4);
+                $('ul#lishi').append(li);
+            }
+        });
+        </c:forEach>
+        </c:if>
     });
-    </c:forEach>
-    </c:if>
 
     // 当点击修改时触发
     $('#edit').click(function (){

@@ -34,6 +34,7 @@ public class ComicDetailServlet extends HttpServlet {
         //根据id查找到相应动漫和评论内容
         Comic comic = comicService.getComicById(Integer.parseInt(id));
         List<Comment> commentList = commentService.getComment(Integer.parseInt(id));
+        List<Comic> comicList = comicService.getIndexComic();  // 动漫榜单
         //实例化user
         for(Comment list:commentList){
                 list.setReviewer(userService.selectByUserId(list.getUserId()));
@@ -43,6 +44,8 @@ public class ComicDetailServlet extends HttpServlet {
 //        req.setAttribute("detailList",comicAndComment);
         req.setAttribute("comic", comic);
         req.setAttribute("commentList", commentList);
+        req.setAttribute("comicList", comicList);
+//        System.out.println(commentList);
         req.getRequestDispatcher("/comic/comic_info.do").forward(req,resp);
     }
 }

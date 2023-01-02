@@ -40,32 +40,28 @@ public class ComicDaoImpl extends BaseDao implements ComicDao {
     }
 
     @Override
-    public List<Comic> getComic(int first, int last,int region) {
+    public List<Comic> getComic(String region) {
         List<Comic> comicList= new ArrayList<>();
-        String sql;
-        if (region==0) {
-            sql = "SELECT * FROM comic_table ORDER BY id LIMIT ?,?";
-        }else {
-            sql = "SELECT * FROM comic_table WHERE region=? ORDER BY id LIMIT ?,?";
-        }
+        String sql = "SELECT * FROM comic_table WHERE region=? ORDER BY id";
             try {
-                if (region==0){
-                    pstmt = conn.prepareStatement(sql);
-                    pstmt.setInt(1, first);
-                    pstmt.setInt(2, last);
-                    rs = pstmt.executeQuery();
-                }else {
-                    pstmt = conn.prepareStatement(sql);
-                    pstmt.setInt(1,region);
-                    pstmt.setInt(2, first);
-                    pstmt.setInt(3, last);
-                    rs = pstmt.executeQuery();
-                }
+                pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1,region);
+                rs = pstmt.executeQuery();
                 while (rs.next()) {
                     Comic comic = new Comic();
                     comic.setId(rs.getInt("id"));
                     comic.setComicName(rs.getString("comicName"));
+                    comic.setNickname(rs.getString("nickname"));
                     comic.setCover(rs.getString("cover"));
+                    comic.setRegion(rs.getString("region"));
+                    comic.setLabel(rs.getString("label"));
+                    comic.setDescription(rs.getString("description"));
+                    comic.setRemark(rs.getString("remark"));
+                    comic.setYear(rs.getString("year"));
+                    comic.setUpdateTime(rs.getString("updateTime"));
+                    comic.setNumber(rs.getInt("number"));
+                    comic.setPopularity(rs.getInt("popularity"));
+                    comic.setUrl(rs.getString("url"));
                     comicList.add(comic);
                 }
             } catch (SQLException e) {
@@ -103,7 +99,7 @@ public class ComicDaoImpl extends BaseDao implements ComicDao {
     @Override
     public List<Comic> getIndexComic() {
         List<Comic> comicList=new ArrayList<>();
-        String sql="SELECT * FROM comic_table order by number desc limit 5";
+        String sql="SELECT * FROM comic_table order by number desc limit 10";
         try {
             pstmt = conn.prepareStatement(sql);
             getComic(comicList);
@@ -119,7 +115,17 @@ public class ComicDaoImpl extends BaseDao implements ComicDao {
             Comic comic = new Comic();
             comic.setId(rs.getInt("id"));
             comic.setComicName(rs.getString("comicName"));
+            comic.setNickname(rs.getString("nickname"));
             comic.setCover(rs.getString("cover"));
+            comic.setRegion(rs.getString("region"));
+            comic.setLabel(rs.getString("label"));
+            comic.setDescription(rs.getString("description"));
+            comic.setRemark(rs.getString("remark"));
+            comic.setYear(rs.getString("year"));
+            comic.setUpdateTime(rs.getString("updateTime"));
+            comic.setNumber(rs.getInt("number"));
+            comic.setPopularity(rs.getInt("popularity"));
+            comic.setUrl(rs.getString("url"));
             comicList.add(comic);
         }
     }
@@ -134,7 +140,7 @@ public class ComicDaoImpl extends BaseDao implements ComicDao {
             rs = pstmt.executeQuery();
             while (rs.next()){
                 comic = new Comic();
-                comic.setId(id);
+                comic.setId(rs.getInt("id"));
                 comic.setComicName(rs.getString("comicName"));
                 comic.setNickname(rs.getString("nickname"));
                 comic.setCover(rs.getString("cover"));

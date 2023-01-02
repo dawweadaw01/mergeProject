@@ -85,7 +85,9 @@
                     <th scope="row">${admin.id}</th>
                     <td>${admin.adminName}</td>
                     <td>${admin.password}</td>
-                    <td>${admin.default_avatar}</td>
+                    <td>
+                        <img src="${admin.default_avatar}" alt="图片" style="width: 45px; height: 45px;">
+                    </td>
                     <td>
                         <button id="btnEdit" class="btn btn-warning"><span
                                 class="iconfont icon-xiugai"></span>修改

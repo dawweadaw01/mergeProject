@@ -62,7 +62,7 @@
 
 <div class="container">
     <div class="panel panel-default">
-        <div class="panel-heading">折线图</div>
+        <div class="panel-heading">2014-2020年日本市场结构及增长动向(单位：十亿日元)</div>
         <div class="panel-body">
             <div id="m1" style="width: 100%; height: 600px;"></div>
         </div>
@@ -70,7 +70,7 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="panel panel-default">
-                <div class="panel-heading">柱状图</div>
+                <div class="panel-heading">2014-2020年日本动画产业总营业额（单位：十亿日元）</div>
                 <div class="panel-body">
                     <div id="m2" style="width:100%;height:400px;"></div>
                 </div>
@@ -78,7 +78,7 @@
         </div>
         <div class="col-sm-6">
             <div class="panel panel-default">
-                <div class="panel-heading">饼图</div>
+                <div class="panel-heading">2016-2020年日本TV动画制作时长（单位：分钟）</div>
                 <div class="panel-body">
                     <div id="m3" style="width: 100%;height: 400px;"></div>
                 </div>
@@ -92,27 +92,6 @@
         </div>
     </div>
 </div>
-
-
-<%--<nav aria-label="Page navigation">--%>
-<%--    <ul class="pagination">--%>
-<%--        <li>--%>
-<%--            <a href="#" aria-label="Previous">--%>
-<%--                <span aria-hidden="true">&laquo;</span>--%>
-<%--            </a>--%>
-<%--        </li>--%>
-<%--        <li><a href="#">1</a></li>--%>
-<%--        <li><a href="#">2</a></li>--%>
-<%--        <li><a href="#">3</a></li>--%>
-<%--        <li><a href="#">4</a></li>--%>
-<%--        <li><a href="#">5</a></li>--%>
-<%--        <li>--%>
-<%--            <a href="#" aria-label="Next">--%>
-<%--                <span aria-hidden="true">&raquo;</span>--%>
-<%--            </a>--%>
-<%--        </li>--%>
-<%--    </ul>--%>
-<%--</nav>--%>
 
 <script src="static/jquery-3.5.1/jquery-3.5.1.js"></script>
 <script src="static/bootstrap-3.4.1-dist/js/bootstrap.js"></script>
@@ -145,7 +124,7 @@
                 }
             },
             legend: {
-                // data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+                // data: ['电视', '电影', '视频', '海外', '弹珠']
             },
             toolbox: {
                 feature: {
@@ -162,7 +141,7 @@
                 {
                     type: 'category',
                     boundaryGap: false,
-                    // data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                    // data: ['2014', '2015', '2016', '2017', '2018', '2019', '2020']
                 }
             ],
             yAxis: [
@@ -172,7 +151,7 @@
             ],
             series: [
                 {
-                    name: 'Email',
+                    name: '电视',
                     type: 'line',
                     stack: 'Total',
                     areaStyle: {},
@@ -182,7 +161,7 @@
                     // data: [120, 132, 101, 134, 90, 230, 210]
                 },
                 {
-                    name: 'Union Ads',
+                    name: '电影',
                     type: 'line',
                     stack: 'Total',
                     areaStyle: {},
@@ -192,7 +171,7 @@
                     // data: [220, 182, 191, 234, 290, 330, 310]
                 },
                 {
-                    name: 'Video Ads',
+                    name: '视频',
                     type: 'line',
                     stack: 'Total',
                     areaStyle: {},
@@ -202,7 +181,7 @@
                     // data: [150, 232, 201, 154, 190, 330, 410]
                 },
                 {
-                    name: 'Direct',
+                    name: '海外',
                     type: 'line',
                     stack: 'Total',
                     areaStyle: {},
@@ -212,7 +191,7 @@
                     // data: [320, 332, 301, 334, 390, 330, 320]
                 },
                 {
-                    name: 'Search Engine',
+                    name: '弹珠',
                     type: 'line',
                     stack: 'Total',
                     label: {
@@ -267,7 +246,7 @@
             xAxis: [
                 {
                     type: 'category',
-                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    data: ['2014', '2015', '2016', '2017', '2018', '2019', '2020'],
                     axisTick: {
                         alignWithLabel: true
                     }
@@ -283,7 +262,7 @@
                     name: 'Direct',
                     type: 'bar',
                     barWidth: '60%',
-                    data: [10, 52, 200, 334, 390, 330, 220]
+                    data: [1637, 1829, 1990, 2142, 2180, 2514, 2426]
                 }
             ]
         };
@@ -296,8 +275,8 @@
 
         let option = {
             title: {
-                text: 'Referer of a Website',
-                subtext: 'Fake Data',
+                text: 'TV动画制作时长',
+                subtext: 'True Data',
                 left: 'center'
             },
             tooltip: {
@@ -313,11 +292,11 @@
                     type: 'pie',
                     radius: '50%',
                     data: [
-                        {value: 1048, name: 'Search Engine'},
-                        {value: 735, name: 'Direct'},
-                        {value: 580, name: 'Email'},
-                        {value: 484, name: 'Union Ads'},
-                        {value: 300, name: 'Video Ads'}
+                        {value: 115854, name: '2016'},
+                        {value: 115846, name: '2017'},
+                        {value: 130347, name: '2018'},
+                        {value: 106966, name: '2019'},
+                        {value: 100845, name: '2020'}
                     ],
                     emphasis: {
                         itemStyle: {

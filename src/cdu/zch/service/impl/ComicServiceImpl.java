@@ -16,8 +16,8 @@ public class ComicServiceImpl implements ComicService {
     }
 
     @Override
-    public List<Comic> getComic(int first, int last,int region) {
-        return comicDao.getComic((first-1)*last,last,region);
+    public List<Comic> getComic(String region) {
+        return comicDao.getComic(region);
     }
 
     @Override

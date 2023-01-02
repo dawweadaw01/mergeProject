@@ -8,7 +8,7 @@ public interface ComicService {
     //添加动漫
     int addComic(Comic comic);
     //根据地区获取动漫
-    List<Comic> getComic(int first,int last,int region);
+    List<Comic> getComic(String region);
     //根据地区获取动漫总数
     int count(int region);
     //根据热度获取动漫

@@ -8,7 +8,7 @@ public interface ComicDao {
     //添加动漫
     int addComic(Comic comic);
     //根据地区查找
-    List<Comic> getComic(int first,int last,int region);
+    List<Comic> getComic(String region);
     //计算该类动漫个数
     int count(int region);
     //获取轮播图动漫（热度前五）

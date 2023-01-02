@@ -18,6 +18,7 @@ public class CommentDaoImpl extends BaseDao implements CommentDao {
             rs = pstmt.executeQuery();
             while (rs.next()){
                 Comment comment=new Comment();
+                comment.setId(rs.getInt("id"));
                 comment.setComicId(rs.getInt("comicId"));
                 comment.setUserId(rs.getInt("userId"));
                 comment.setOtherId(rs.getInt("otherId"));
