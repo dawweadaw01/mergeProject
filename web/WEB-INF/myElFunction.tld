@@ -16,7 +16,7 @@
             格式化日期
         </description>
         <name>formatDate</name>
-        <function-class>cdu.zch.taglibs.MyElFunctions</function-class>
+        <function-class>cdu.lhj.taglibs.MyElFunctions</function-class>
         <function-signature>java.lang.String formatDate(long)</function-signature>
         <example>
             date: ${myfn:formatDate(datetime)}
@@ -28,7 +28,7 @@
             格式化日期时间
         </description>
         <name>formatDatetime</name>
-        <function-class>cdu.zch.taglibs.MyElFunctions</function-class>
+        <function-class>cdu.lhj.taglibs.MyElFunctions</function-class>
         <function-signature>java.lang.String formatDatetime(long)</function-signature>
         <example>
             datetime: ${myfn:formatDatetime(datetime)}

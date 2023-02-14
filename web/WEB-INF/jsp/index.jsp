@@ -1,6 +1,6 @@
-<%@ page import="cdu.zch.service.ComicService" %>
-<%@ page import="cdu.zch.service.impl.ComicServiceImpl" %>
-<%@ page import="cdu.zch.model.Comic" %>
+<%@ page import="cdu.lhj.service.ComicService" %>
+<%@ page import="cdu.lhj.service.impl.ComicServiceImpl" %>
+<%@ page import="cdu.lhj.model.Comic" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: 20698
